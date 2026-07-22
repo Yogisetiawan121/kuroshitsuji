@@ -1,32 +1,38 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function AudioAmbience({ isMuted }) {
   const audioRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
   const retryCountRef = useRef(0);
-  const interactionListenerRef = useRef(null);
+  // Keep refs in sync so interaction closure always reads the latest values
+  const isMutedRef = useRef(isMuted);
+  isMutedRef.current = isMuted;
+  const isLoadedRef = useRef(isLoaded);
+  isLoadedRef.current = isLoaded;
 
-  // Attempt to play the audio, retrying on the first user interaction if blocked
-  const attemptPlay = useCallback((audioEl) => {
-    audioEl.play().catch(() => {
-      // Browser blocked autoplay — wait for the first user interaction
-      if (!interactionListenerRef.current) {
-        const retryOnInteraction = () => {
-          audioEl.play().catch(() => {});
-          document.removeEventListener('click', retryOnInteraction);
-          document.removeEventListener('touchstart', retryOnInteraction);
-          document.removeEventListener('keydown', retryOnInteraction);
-          interactionListenerRef.current = null;
-        };
-        interactionListenerRef.current = retryOnInteraction;
-        document.addEventListener('click', retryOnInteraction, { once: true });
-        document.addEventListener('touchstart', retryOnInteraction, { once: true });
-        document.addEventListener('keydown', retryOnInteraction, { once: true });
+  // Register one persistent interaction listener on mount.
+  // Every user click checks if audio should start — the first click
+  // that lands after audio is loaded starts playback within the
+  // browser-required user-gesture context.
+  useEffect(() => {
+    const handleInteraction = () => {
+      const el = audioRef.current;
+      if (el && el.paused && !isMutedRef.current && isLoadedRef.current) {
+        el.play().catch(() => {});
       }
-    });
+    };
+    document.addEventListener('click', handleInteraction);
+    document.addEventListener('touchstart', handleInteraction);
+    document.addEventListener('keydown', handleInteraction);
+    return () => {
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
   }, []);
 
+  // Main audio lifecycle: create element, play/pause, cleanup
   useEffect(() => {
     // Create audio element once
     if (!audioRef.current) {
@@ -37,6 +43,7 @@ export default function AudioAmbience({ isMuted }) {
       audio.src = '/audio/dark_calm_ambience.mp3';
 
       audio.oncanplaythrough = () => {
+        isLoadedRef.current = true;
         setIsLoaded(true);
         setError(false);
       };
@@ -52,26 +59,22 @@ export default function AudioAmbience({ isMuted }) {
 
     // Control playback based on mute state
     if (!isMuted && isLoaded && audioEl.paused) {
-      attemptPlay(audioEl);
+      // Browser may block this — the interaction listener registered
+      // above will handle the retry on first user gesture.
+      audioEl.play().catch(() => {});
     } else if (isMuted && !audioEl.paused) {
       audioEl.pause();
     }
 
     // Cleanup on unmount
     return () => {
-      if (interactionListenerRef.current) {
-        document.removeEventListener('click', interactionListenerRef.current);
-        document.removeEventListener('touchstart', interactionListenerRef.current);
-        document.removeEventListener('keydown', interactionListenerRef.current);
-        interactionListenerRef.current = null;
-      }
       if (audioEl) {
         audioEl.pause();
         audioEl.src = '';
         audioRef.current = null;
       }
     };
-  }, [isMuted, isLoaded, attemptPlay]);
+  }, [isMuted, isLoaded]);
 
   // Retry waiting for audio to load (with cap) — only active while unmuted + unloaded
   useEffect(() => {
@@ -79,11 +82,12 @@ export default function AudioAmbience({ isMuted }) {
       const audioEl = audioRef.current;
       const retry = setInterval(() => {
         if (audioEl.readyState >= 3) {
+          isLoadedRef.current = true;
           setIsLoaded(true);
           clearInterval(retry);
         } else {
           retryCountRef.current += 1;
-          // Give up after 60 retries (~18 seconds) to avoid leaking interval forever
+          // Give up after 60 retries (~18 seconds)
           if (retryCountRef.current >= 60) {
             clearInterval(retry);
             setError(true);
