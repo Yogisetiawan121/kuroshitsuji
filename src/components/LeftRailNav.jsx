@@ -11,7 +11,8 @@ import {
   Skull,
   Crown,
   Volume2,
-  VolumeX
+  VolumeX,
+  Music
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -90,8 +91,8 @@ export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, 
         <div className="flex flex-col items-center space-y-3">
           <button
             onClick={toggleAudio}
-            className="p-2 text-[#718096] hover:text-[#8B0000] transition-colors"
-            title={isAudioMuted ? "Enable Ambient Audio" : "Mute Ambient Audio"}
+            className="p-2 border border-[#8B0000]/40 rounded-full bg-[#121214] text-[#718096] hover:text-[#8B0000] hover:border-[#8B0000] transition-colors"
+            title={isAudioMuted ? "Enable Gothic Ambient Audio" : "Mute Gothic Ambient Audio"}
           >
             {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#8B0000] animate-pulse" />}
           </button>
@@ -102,14 +103,39 @@ export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, 
         </div>
       </aside>
 
-      {/* Mobile Top/Bottom Horizontal Nav Bar */}
-      <nav className="lg:hidden fixed top-0 left-0 right-0 bg-[#0A0A0A]/95 border-b border-[#4A5568]/40 z-40 backdrop-blur-md px-3 py-2 flex items-center justify-between overflow-x-auto no-scrollbar">
-        <div className="flex items-center space-x-2 shrink-0 pr-3 border-r border-[#4A5568]/40">
-          <Skull className="w-5 h-5 text-[#8B0000]" />
-          <span className="text-xs font-headline tracking-widest text-[#E2E8F0]">KUROSHITSUJI</span>
+      {/* Mobile Top Header Navigation Bar */}
+      <nav className="lg:hidden fixed top-0 left-0 right-0 bg-[#0A0A0A]/95 border-b border-[#4A5568]/40 z-40 backdrop-blur-md px-3 py-2 flex flex-col space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Skull className="w-5 h-5 text-[#8B0000]" />
+            <span className="text-xs font-headline tracking-widest text-[#E2E8F0]">KUROSHITSUJI</span>
+          </div>
+
+          {/* Prominent Mobile Ambience Music Button */}
+          <button
+            onClick={toggleAudio}
+            className={`flex items-center space-x-1.5 px-3 py-1 rounded-none border text-[10px] font-mono tracking-widest uppercase transition-all duration-300 ${
+              !isAudioMuted
+                ? 'border-[#8B0000] bg-[#8B0000]/25 text-[#E2E8F0] shadow-[0_0_15px_rgba(139,0,0,0.5)]'
+                : 'border-[#4A5568]/60 bg-[#121214] text-[#718096] hover:text-[#E2E8F0] hover:border-[#8B0000]'
+            }`}
+          >
+            {isAudioMuted ? (
+              <>
+                <VolumeX className="w-3.5 h-3.5 text-[#718096]" />
+                <span>MUSIC OFF</span>
+              </>
+            ) : (
+              <>
+                <Volume2 className="w-3.5 h-3.5 text-[#8B0000] animate-pulse" />
+                <span className="text-[#8B0000] font-bold">MUSIC ON</span>
+              </>
+            )}
+          </button>
         </div>
 
-        <div className="flex items-center space-x-1 overflow-x-auto no-scrollbar">
+        {/* Scrollable Navigation Tabs */}
+        <div className="flex items-center space-x-1 overflow-x-auto no-scrollbar pt-1 pb-0.5">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -117,7 +143,7 @@ export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, 
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex items-center space-x-1 px-2.5 py-1 rounded border text-[10px] font-mono tracking-widest whitespace-nowrap transition-all ${
+                className={`flex items-center space-x-1 px-2.5 py-1 rounded-none border text-[10px] font-mono tracking-widest whitespace-nowrap transition-all ${
                   isActive
                     ? 'border-[#8B0000] bg-[#8B0000]/20 text-[#E2E8F0]'
                     : 'border-transparent text-[#718096] hover:text-[#E2E8F0]'
