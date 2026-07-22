@@ -14,7 +14,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('STATUS');
   const [activeCharacter, setActiveCharacter] = useState('sebastian');
   const [isContractOpen, setIsContractOpen] = useState(false);
-  const [isAudioMuted, setIsAudioMuted] = useState(true);
+  const [isAudioMuted, setIsAudioMuted] = useState(false);
 
   const character = CHARACTERS[activeCharacter] || CHARACTERS.sebastian;
 

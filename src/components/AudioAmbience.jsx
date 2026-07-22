@@ -1,10 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 export default function AudioAmbience({ isMuted }) {
   const audioRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
   const retryCountRef = useRef(0);
+  const interactionListenerRef = useRef(null);
+
+  // Attempt to play the audio, retrying on the first user interaction if blocked
+  const attemptPlay = useCallback((audioEl) => {
+    audioEl.play().catch(() => {
+      // Browser blocked autoplay — wait for the first user interaction
+      if (!interactionListenerRef.current) {
+        const retryOnInteraction = () => {
+          audioEl.play().catch(() => {});
+          document.removeEventListener('click', retryOnInteraction);
+          document.removeEventListener('touchstart', retryOnInteraction);
+          document.removeEventListener('keydown', retryOnInteraction);
+          interactionListenerRef.current = null;
+        };
+        interactionListenerRef.current = retryOnInteraction;
+        document.addEventListener('click', retryOnInteraction, { once: true });
+        document.addEventListener('touchstart', retryOnInteraction, { once: true });
+        document.addEventListener('keydown', retryOnInteraction, { once: true });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     // Create audio element once
@@ -31,23 +52,26 @@ export default function AudioAmbience({ isMuted }) {
 
     // Control playback based on mute state
     if (!isMuted && isLoaded && audioEl.paused) {
-      // Browser autoplay policy: play must be triggered by user gesture.
-      audioEl.play().catch((err) => {
-        console.warn('Audio play was blocked by browser autoplay policy:', err);
-      });
+      attemptPlay(audioEl);
     } else if (isMuted && !audioEl.paused) {
       audioEl.pause();
     }
 
     // Cleanup on unmount
     return () => {
+      if (interactionListenerRef.current) {
+        document.removeEventListener('click', interactionListenerRef.current);
+        document.removeEventListener('touchstart', interactionListenerRef.current);
+        document.removeEventListener('keydown', interactionListenerRef.current);
+        interactionListenerRef.current = null;
+      }
       if (audioEl) {
         audioEl.pause();
         audioEl.src = '';
         audioRef.current = null;
       }
     };
-  }, [isMuted, isLoaded]);
+  }, [isMuted, isLoaded, attemptPlay]);
 
   // Retry waiting for audio to load (with cap) — only active while unmuted + unloaded
   useEffect(() => {
