@@ -105,7 +105,7 @@ export default function AudioAmbience({ isMuted }) {
     <>
       {/* Subtle now-playing indicator — only visible when audio is actively playing */}
       {!isMuted && !error && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-none select-none">
+        <div className="fixed bottom-12 lg:bottom-8 left-1/2 -translate-x-1/2 z-40 pointer-events-none select-none">
           <div className="flex items-center space-x-3 px-4 py-1.5 bg-[#0A0A0A]/80 border border-[#8B0000]/40 backdrop-blur-md rounded-none">
             <div className="flex items-center space-x-1">
               <span className="w-0.5 h-3 bg-[#8B0000] animate-pulse rounded-full" style={{ animationDelay: '0ms' }} />
@@ -114,8 +114,8 @@ export default function AudioAmbience({ isMuted }) {
               <span className="w-0.5 h-2 bg-[#8B0000] animate-pulse rounded-full" style={{ animationDelay: '600ms' }} />
               <span className="w-0.5 h-3 bg-[#8B0000] animate-pulse rounded-full" style={{ animationDelay: '300ms' }} />
             </div>
-            <span className="text-[9px] font-mono tracking-[0.2em] text-[#718096] uppercase">
-              Phantomhive Manor Ambience — Active
+            <span className="text-[9px] font-mono tracking-[0.2em] text-[#718096] uppercase whitespace-nowrap">
+              <span className="hidden sm:inline">Phantomhive Manor Ambience — </span>Active
             </span>
           </div>
         </div>

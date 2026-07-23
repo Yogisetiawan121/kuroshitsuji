@@ -9,6 +9,7 @@ import BottomMarquee from './components/BottomMarquee';
 import AudioAmbience from './components/AudioAmbience';
 import { Volume2, VolumeX } from 'lucide-react';
 import { CHARACTERS } from './data/characterData';
+import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('STATUS');
@@ -18,11 +19,34 @@ export default function App() {
 
   const character = CHARACTERS[activeCharacter] || CHARACTERS.sebastian;
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const isArcView = activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE';
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-[#E2E8F0] font-body relative overflow-x-hidden">
       
-      {/* Particle Depth Canvas */}
-      <ParticleBackground />
+      {/* Top Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-[#8B0000] origin-left z-50 shadow-[0_0_10px_rgba(139,0,0,0.8)]"
+        style={{ scaleX }}
+      />
+
+      {/* Dynamic Particle Depth Canvas */}
+      <ParticleBackground activeTab={activeTab} />
+
+      {/* Dynamic Arc Background Overlays */}
+      {activeTab === 'WESTON_COLLEGE' && (
+        <div className="fixed inset-0 cricket-chalk-overlay z-10 pointer-events-none opacity-80 transition-opacity duration-700" />
+      )}
+      {activeTab === 'WOLFS_GORGE' && (
+        <div className="fixed inset-0 emerald-mist-overlay z-10 pointer-events-none opacity-90 transition-opacity duration-700" />
+      )}
 
       {/* Scanline Overlay (0.03 Opacity) */}
       <div className="fixed inset-0 scanline-overlay z-20 pointer-events-none opacity-30" />
@@ -31,7 +55,12 @@ export default function App() {
       <AudioAmbience isMuted={isAudioMuted} />
 
       {/* Main 3-Panel Layout Container */}
-      <div className="flex flex-col lg:flex-row min-h-screen pb-10 pt-20 lg:pt-0 lg:pl-[80px]">
+      <motion.div 
+        className="flex flex-col lg:flex-row min-h-screen pb-32 lg:pb-10 pt-20 lg:pt-0 lg:pl-[90px]"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 60, damping: 20 }}
+      >
         
         {/* Left Rail & Mobile Header Navigation */}
         <LeftRailNav
@@ -43,20 +72,22 @@ export default function App() {
         />
 
         {/* Content Region */}
-        {activeTab === 'STATUS' ? (
+        {activeTab === 'STATUS' || isArcView ? (
           <div className="flex-1 flex flex-col lg:flex-row min-w-0">
-            {/* Center Stage Narrative Zone */}
+            {/* Center Stage Narrative / Arc Zone */}
             <CenterStage
               character={character}
               activeCharacter={activeCharacter}
               setActiveCharacter={setActiveCharacter}
               onOpenContract={() => setIsContractOpen(true)}
+              activeTab={activeTab}
             />
 
-            {/* Right Panel Tactical Readout */}
+            {/* Right Panel Tactical Readout / Arc Tactical Data */}
             <RightPanel
               character={character}
               onOpenContract={() => setIsContractOpen(true)}
+              activeTab={activeTab}
             />
           </div>
         ) : (
@@ -65,23 +96,25 @@ export default function App() {
               activeTab={activeTab}
               character={character}
               onOpenContract={() => setIsContractOpen(true)}
+              setActiveTab={setActiveTab}
             />
             <RightPanel
               character={character}
               onOpenContract={() => setIsContractOpen(true)}
+              activeTab={activeTab}
             />
           </div>
         )}
 
-      </div>
+      </motion.div>
 
       {/* Floating Action Buttons (Bottom Right): Ambience Toggle + Faustian Contract Seal */}
       <div className="fixed bottom-10 right-4 sm:right-6 z-40 flex items-center space-x-3">
         
-        {/* Floating Mobile/Desktop Ambience Toggle Button */}
+        {/* Floating Desktop Ambience Toggle Button (Hidden on Mobile) */}
         <button
           onClick={() => setIsAudioMuted(!isAudioMuted)}
-          className={`p-3 rounded-full border-2 transition-all duration-300 shadow-[0_0_20px_rgba(139,0,0,0.5)] ${
+          className={`hidden lg:flex p-3 rounded-full border-2 transition-all duration-300 shadow-[0_0_20px_rgba(139,0,0,0.5)] ${
             !isAudioMuted
               ? 'bg-[#8B0000] border-[#B22222] text-white shadow-[0_0_25px_rgba(139,0,0,0.8)] animate-pulse'
               : 'bg-[#0A0A0A] border-[#8B0000]/60 text-[#718096] hover:text-white hover:border-[#8B0000]'

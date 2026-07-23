@@ -1,13 +1,34 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldAlert, Layers, Maximize2, UserCheck } from 'lucide-react';
+import ScrambleText from './ScrambleText';
+import ArcStage from './ArcStage';
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 15 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+  },
+  exit: { opacity: 0, y: -15, transition: { duration: 0.3 } }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
+};
 
 export default function CenterStage({ 
   character, 
   activeCharacter, 
   setActiveCharacter,
-  onOpenContract 
+  onOpenContract,
+  activeTab = 'STATUS'
 }) {
+  if (activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE') {
+    return <ArcStage activeTab={activeTab} onOpenContract={onOpenContract} />;
+  }
   const [selectedImgIndex, setSelectedImgIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
 
@@ -19,11 +40,11 @@ export default function CenterStage({
       {/* Top Header & Character Selector Toggle */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
         <div>
-          <div className="flex items-center space-x-2 text-[10px] font-mono tracking-[0.2em] text-[#718096]">
+          <div className="flex items-center space-x-2 text-xs font-mono tracking-[0.2em] text-[#718096]">
             <span className="w-2 h-2 rounded-full bg-[#8B0000] animate-ping" />
             <span>RESTRICTED OCCULT FILE // ARCHIVE 1889</span>
           </div>
-          <p className="text-xs font-jp text-[#718096] mt-0.5 tracking-wider">
+          <p className="text-sm font-jp text-[#718096] mt-0.5 tracking-wider">
             {character.japaneseName}
           </p>
         </div>
@@ -35,14 +56,21 @@ export default function CenterStage({
               setActiveCharacter('sebastian');
               setSelectedImgIndex(0);
             }}
-            className={`flex items-center space-x-2 px-4 py-1.5 text-xs font-mono tracking-[0.2em] transition-all duration-300 ${
+            className={`relative flex items-center space-x-2 px-4 py-1.5 text-xs font-mono tracking-[0.2em] transition-all duration-300 ${
               activeCharacter === 'sebastian'
-                ? 'bg-[#8B0000] text-white shadow-[0_0_15px_rgba(139,0,0,0.5)] border border-[#8B0000]'
-                : 'text-[#718096] hover:text-[#E2E8F0] hover:bg-white/[0.03]'
+                ? 'text-white'
+                : 'text-[#718096] hover:text-[#E2E8F0] hover:bg-white/[0.03] border border-transparent'
             }`}
           >
-            <UserCheck className="w-3.5 h-3.5" />
-            <span>SEBASTIAN</span>
+            <UserCheck className={`w-3.5 h-3.5 relative z-10 ${activeCharacter === 'sebastian' ? 'text-white' : ''}`} />
+            <span className="relative z-10">SEBASTIAN</span>
+            {activeCharacter === 'sebastian' && (
+              <motion.div 
+                layoutId="activeCharIndicator"
+                className="absolute inset-0 bg-[#8B0000] border border-[#8B0000] shadow-[0_0_15px_rgba(139,0,0,0.5)] z-0" 
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              />
+            )}
           </button>
           
           <button
@@ -50,14 +78,21 @@ export default function CenterStage({
               setActiveCharacter('ciel');
               setSelectedImgIndex(0);
             }}
-            className={`flex items-center space-x-2 px-4 py-1.5 text-xs font-mono tracking-[0.2em] transition-all duration-300 ${
+            className={`relative flex items-center space-x-2 px-4 py-1.5 text-xs font-mono tracking-[0.2em] transition-all duration-300 ${
               activeCharacter === 'ciel'
-                ? 'bg-[#8B0000] text-white shadow-[0_0_15px_rgba(139,0,0,0.5)] border border-[#8B0000]'
-                : 'text-[#718096] hover:text-[#E2E8F0] hover:bg-white/[0.03]'
+                ? 'text-white'
+                : 'text-[#718096] hover:text-[#E2E8F0] hover:bg-white/[0.03] border border-transparent'
             }`}
           >
-            <ShieldAlert className="w-3.5 h-3.5" />
-            <span>CIEL</span>
+            <ShieldAlert className={`w-3.5 h-3.5 relative z-10 ${activeCharacter === 'ciel' ? 'text-white' : ''}`} />
+            <span className="relative z-10">CIEL</span>
+            {activeCharacter === 'ciel' && (
+              <motion.div 
+                layoutId="activeCharIndicator"
+                className="absolute inset-0 bg-[#8B0000] border border-[#8B0000] shadow-[0_0_15px_rgba(139,0,0,0.5)] z-0" 
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              />
+            )}
           </button>
         </div>
       </div>
@@ -66,45 +101,47 @@ export default function CenterStage({
       <AnimatePresence mode="wait">
         <motion.div
           key={character.id}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -15 }}
-          transition={{ duration: 0.4 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          exit="exit"
           className="space-y-6"
         >
           {/* Gothic Headline */}
-          <div>
+          <motion.div variants={itemVariants}>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline font-bold tracking-wider leading-tight">
-              <span className="text-[#E2E8F0]">{character.name} </span>
+              <span className="text-[#E2E8F0]">
+                <ScrambleText text={character.name} delay={200} duration={800} />{' '}
+              </span>
               <span className="text-[#8B0000] drop-shadow-[0_0_10px_rgba(139,0,0,0.4)]">
-                {character.surname}
+                <ScrambleText text={character.surname} delay={400} duration={800} />
               </span>
             </h1>
 
             {/* Subtitle rank with thin decorative line */}
             <div className="flex items-center space-x-4 mt-3">
               <div className="h-[1px] w-12 bg-[#8B0000]" />
-              <span className="text-xs sm:text-sm font-mono tracking-[0.2em] text-[#8B0000] font-semibold">
+              <span className="text-sm sm:text-base font-mono tracking-[0.2em] text-[#8B0000] font-semibold">
                 {character.rank}
               </span>
               <div className="h-[1px] flex-1 bg-[#4A5568]/40" />
-              <span className="text-xs font-mono text-[#718096] hidden md:inline tracking-widest">
+              <span className="text-sm font-mono text-[#718096] hidden md:inline tracking-widest">
                 CONTRACT NO: {character.contractNo}
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Epigraph / Quote in Cormorant Garamond Italic */}
-          <blockquote className="relative p-4 sm:p-6 bg-[#121214]/60 border-l-2 border-[#8B0000] backdrop-blur-sm">
-            <p className="text-lg sm:text-xl font-subhead italic text-[#E2E8F0] leading-relaxed">
+          <motion.blockquote variants={itemVariants} className="relative p-4 sm:p-6 bg-[#121214]/60 border-l-2 border-[#8B0000] backdrop-blur-sm">
+            <p className="text-xl sm:text-2xl font-subhead italic text-[#E2E8F0] leading-relaxed">
               "{character.quote}"
             </p>
             <div className="gothic-corner-tr !w-2 !h-2" />
             <div className="gothic-corner-bl !w-2 !h-2" />
-          </blockquote>
+          </motion.blockquote>
 
           {/* Character Portrait Area */}
-          <div className="relative group">
+          <motion.div variants={itemVariants} className="relative group">
             {/* Ornate Frame Container */}
             <div className="relative ornate-frame bg-[#0a0a0a] rounded-none overflow-hidden group">
               {/* Corner Ornaments */}
@@ -141,10 +178,10 @@ export default function CenterStage({
 
                 {/* Image Caption overlay */}
                 <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end pointer-events-none">
-                  <div className="bg-[#0A0A0A]/80 border border-[#4A5568]/60 px-3 py-1 text-[10px] font-mono text-[#E2E8F0] tracking-widest backdrop-blur-md">
+                  <div className="bg-[#0A0A0A]/80 border border-[#4A5568]/60 px-3 py-1.5 text-xs font-mono text-[#E2E8F0] tracking-widest backdrop-blur-md">
                     {currentImage.caption}
                   </div>
-                  <span className="text-[10px] font-mono text-[#718096] tracking-widest">
+                  <span className="text-xs font-mono text-[#718096] tracking-widest">
                     IMAGE {selectedImgIndex + 1} OF {character.images.length}
                   </span>
                 </div>
@@ -180,40 +217,40 @@ export default function CenterStage({
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Bottom Metadata Bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="p-3 bg-[#121214] border border-[#4A5568]/30 relative">
-              <span className="text-[9px] font-mono text-[#718096] tracking-[0.2em] block uppercase">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div className="p-3.5 bg-[#121214] border border-[#4A5568]/30 relative">
+              <span className="text-xs font-mono text-[#718096] tracking-[0.2em] block uppercase font-semibold">
                 CONTRACT STATUS
               </span>
-              <span className="text-xs font-mono font-bold text-[#8B0000] tracking-widest mt-1 block">
+              <span className="text-sm font-mono font-bold text-[#8B0000] tracking-widest mt-1 block">
                 {character.metadata.contractStatus}
               </span>
               <div className="gothic-corner-tl !w-1.5 !h-1.5" />
             </div>
 
-            <div className="p-3 bg-[#121214] border border-[#4A5568]/30 relative">
-              <span className="text-[9px] font-mono text-[#718096] tracking-[0.2em] block uppercase">
+            <div className="p-3.5 bg-[#121214] border border-[#4A5568]/30 relative">
+              <span className="text-xs font-mono text-[#718096] tracking-[0.2em] block uppercase font-semibold">
                 SOUL APPRAISAL
               </span>
-              <span className="text-xs font-mono font-bold text-[#E2E8F0] tracking-widest mt-1 block">
+              <span className="text-sm font-mono font-bold text-[#E2E8F0] tracking-widest mt-1 block">
                 {character.metadata.soulAppraisal}
               </span>
               <div className="gothic-corner-tr !w-1.5 !h-1.5" />
             </div>
 
-            <div className="p-3 bg-[#121214] border border-[#4A5568]/30 relative">
-              <span className="text-[9px] font-mono text-[#718096] tracking-[0.2em] block uppercase">
+            <div className="p-3.5 bg-[#121214] border border-[#4A5568]/30 relative">
+              <span className="text-xs font-mono text-[#718096] tracking-[0.2em] block uppercase font-semibold">
                 CURRENT MASTER
               </span>
-              <span className="text-xs font-mono font-bold text-[#8B0000] tracking-widest mt-1 block">
+              <span className="text-sm font-mono font-bold text-[#8B0000] tracking-widest mt-1 block">
                 {character.metadata.currentMaster}
               </span>
               <div className="gothic-corner-br !w-1.5 !h-1.5" />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </AnimatePresence>
 

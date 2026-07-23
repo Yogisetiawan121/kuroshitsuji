@@ -17,6 +17,43 @@
   --transition-slow: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --border-elegant: 1px solid var(--slate-blue);
   --border-crimson: 1px solid var(--crimson);
+
+  /* WESTON COLLEGE COLOR TOKENS */
+  --weston-red: #7A1F1F;      /* Scarlet Fox */
+  --weston-blue: #2C3E6B;     /* Sapphire Owl */
+  --weston-green: #2F4F2F;    /* Green Lion */
+  --weston-purple: #4B2C5E;   /* Purple Wolf */
+  --academic-gold: #8B7355;   /* Faded brass */
+
+  /* WOLF'S GORGE COLOR TOKENS */
+  --emerald-witch: #1B4D3E;   /* Deep forest green */
+  --toxic-mist: #4A6741;      /* Sickly yellow-green */
+  --wolf-gray: #5A5A5A;       /* Mechanical suit metal */
+  --sulfur-glow: #9ACD32;     /* Poison gas luminescence */
+  --fairy-tale-pale: #D8CDBA; /* Aged parchment */
+}
+
+/* Weston Cricket Field Chalk Lines Overlay */
+.cricket-chalk-overlay {
+  background-image: 
+    linear-gradient(to right, rgba(139, 115, 85, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 115, 85, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Wolf's Gorge Toxic Emerald Mist Overlay */
+.emerald-mist-overlay {
+  background: radial-gradient(circle at 50% 50%, rgba(27, 77, 62, 0.15), transparent 70%),
+              radial-gradient(circle at 20% 80%, rgba(154, 205, 50, 0.08), transparent 50%);
+  pointer-events: none;
+  animation: mistPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes mistPulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.9; }
 }
 
 /* Custom Scrollbar */
