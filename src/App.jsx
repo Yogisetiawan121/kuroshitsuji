@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ParticleBackground from './components/ParticleBackground';
 import LeftRailNav from './components/LeftRailNav';
 import CenterStage from './components/CenterStage';
+import ArcStage from './components/ArcStage';
 import RightPanel from './components/RightPanel';
 import SectionViews from './components/SectionViews';
 import ContractSealModal from './components/ContractSealModal';
@@ -56,7 +57,7 @@ export default function App() {
 
       {/* Main 3-Panel Layout Container */}
       <motion.div 
-        className="flex flex-col lg:flex-row min-h-screen pb-32 lg:pb-10 pt-20 lg:pt-0 lg:pl-[90px]"
+        className="flex flex-col lg:flex-row min-h-screen pb-32 lg:pb-32 pt-20 lg:pt-0 lg:pl-[90px]"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 20 }}
@@ -72,9 +73,9 @@ export default function App() {
         />
 
         {/* Content Region */}
-        {activeTab === 'STATUS' || isArcView ? (
+        {activeTab === 'STATUS' ? (
           <div className="flex-1 flex flex-col lg:flex-row min-w-0">
-            {/* Center Stage Narrative / Arc Zone */}
+            {/* Center Stage Narrative Zone */}
             <CenterStage
               character={character}
               activeCharacter={activeCharacter}
@@ -83,7 +84,23 @@ export default function App() {
               activeTab={activeTab}
             />
 
-            {/* Right Panel Tactical Readout / Arc Tactical Data */}
+            {/* Right Panel Tactical Readout */}
+            <RightPanel
+              character={character}
+              onOpenContract={() => setIsContractOpen(true)}
+              activeTab={activeTab}
+            />
+          </div>
+        ) : isArcView ? (
+          <div className="flex-1 flex flex-col lg:flex-row min-w-0">
+            {/* Tactical Arc Stage View */}
+            <ArcStage
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              onOpenContract={() => setIsContractOpen(true)}
+            />
+
+            {/* Right Panel Arc Tactical Specs */}
             <RightPanel
               character={character}
               onOpenContract={() => setIsContractOpen(true)}
@@ -111,10 +128,10 @@ export default function App() {
       {/* Floating Action Buttons (Bottom Right): Ambience Toggle + Faustian Contract Seal */}
       <div className="fixed bottom-10 right-4 sm:right-6 z-40 flex items-center space-x-3">
         
-        {/* Floating Desktop Ambience Toggle Button (Hidden on Mobile) */}
+        {/* Floating Mobile/Desktop Ambience Toggle Button */}
         <button
           onClick={() => setIsAudioMuted(!isAudioMuted)}
-          className={`hidden lg:flex p-3 rounded-full border-2 transition-all duration-300 shadow-[0_0_20px_rgba(139,0,0,0.5)] ${
+          className={`p-3 rounded-full border-2 transition-all duration-300 shadow-[0_0_20px_rgba(139,0,0,0.5)] ${
             !isAudioMuted
               ? 'bg-[#8B0000] border-[#B22222] text-white shadow-[0_0_25px_rgba(139,0,0,0.8)] animate-pulse'
               : 'bg-[#0A0A0A] border-[#8B0000]/60 text-[#718096] hover:text-white hover:border-[#8B0000]'

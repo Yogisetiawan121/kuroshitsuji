@@ -37,7 +37,7 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
 };
 
-export default function ArcStage({ activeTab, onOpenContract }) {
+export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
   const arcKey = activeTab === 'WOLFS_GORGE' ? 'WOLFS_GORGE' : 'WESTON_COLLEGE';
   const arc = ARCS_DATA[arcKey];
 
@@ -56,7 +56,7 @@ export default function ArcStage({ activeTab, onOpenContract }) {
   return (
     <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col space-y-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)]">
       
-      {/* Top Dossier Header */}
+      {/* Top Dossier Header & Arc Switcher */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
         <div>
           <div className="flex items-center space-x-2 text-xs font-mono tracking-[0.2em] text-[#718096]">
@@ -68,10 +68,38 @@ export default function ArcStage({ activeTab, onOpenContract }) {
           </p>
         </div>
 
-        {/* Arc Classification Badge */}
-        <div className="px-3 py-1.5 border font-mono text-xs tracking-widest uppercase flex items-center space-x-2 shadow-inner" style={{ borderColor: arc.badgeColor, backgroundColor: `${arc.badgeColor}25` }}>
-          <AlertTriangle className="w-3.5 h-3.5" style={{ color: arc.badgeColor }} />
-          <span className="font-bold text-[#E2E8F0]">{arc.classification}</span>
+        {/* Direct Arc Switcher Controls */}
+        <div className="flex flex-wrap items-center gap-2">
+          {setActiveTab && (
+            <>
+              <button
+                onClick={() => setActiveTab('WESTON_COLLEGE')}
+                className={`px-3 py-1.5 font-mono text-xs tracking-widest uppercase border transition-all ${
+                  activeTab === 'WESTON_COLLEGE'
+                    ? 'bg-[#7A1F1F]/40 border-[#8B7355] text-[#E2E8F0] font-bold shadow-[0_0_10px_rgba(139,115,85,0.4)]'
+                    : 'bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#E2E8F0] hover:border-[#8B7355]/60'
+                }`}
+              >
+                WESTON COLLEGE
+              </button>
+              <button
+                onClick={() => setActiveTab('WOLFS_GORGE')}
+                className={`px-3 py-1.5 font-mono text-xs tracking-widest uppercase border transition-all ${
+                  activeTab === 'WOLFS_GORGE'
+                    ? 'bg-[#1B4D3E]/40 border-[#9ACD32] text-[#E2E8F0] font-bold shadow-[0_0_10px_rgba(154,205,50,0.4)]'
+                    : 'bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#E2E8F0] hover:border-[#9ACD32]/60'
+                }`}
+              >
+                WOLF'S GORGE
+              </button>
+              <button
+                onClick={() => setActiveTab('ARCHIVE')}
+                className="px-3 py-1.5 font-mono text-xs tracking-widest uppercase border bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#8B0000] hover:border-[#8B0000]/60 transition-all flex items-center space-x-1"
+              >
+                <span>← ALL ARCHIVES</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -118,8 +146,7 @@ export default function ArcStage({ activeTab, onOpenContract }) {
             <p className="text-base sm:text-lg font-subhead italic text-[#E2E8F0] leading-relaxed">
               "{arc.missionBrief}"
             </p>
-            <div className="gothic-corner-tr !w-2 !h-2" />
-            <div className="gothic-corner-bl !w-2 !h-2" />
+            <div className="gothic-corner-tr !w-2 !h-2 !top-[-9px]" />
           </motion.blockquote>
 
           {/* ARC SPECIFIC CONTENT: WESTON COLLEGE */}
@@ -219,7 +246,7 @@ export default function ArcStage({ activeTab, onOpenContract }) {
                   <p className="text-sm font-subhead text-[#E2E8F0] leading-relaxed">
                     {arc.conspiracy.text}
                   </p>
-                  <div className="gothic-corner-tl !w-2 !h-2" />
+                  <div className="gothic-corner-tl !w-2 !h-2 " />
                   <div className="gothic-corner-br !w-2 !h-2" />
                 </motion.div>
 
@@ -278,7 +305,7 @@ export default function ArcStage({ activeTab, onOpenContract }) {
                           <p className="text-[#E2E8F0] font-subhead text-xs">{char.sulfurGarden}</p>
                         </div>
                       )}
-                      <div className="gothic-corner-tl !w-2 !h-2" />
+                      <div className="gothic-corner-tl !w-2 !h-2 !top-[-13px]" />
                       <div className="gothic-corner-br !w-2 !h-2" />
                     </motion.div>
                   ))}
@@ -301,7 +328,7 @@ export default function ArcStage({ activeTab, onOpenContract }) {
                       </li>
                     ))}
                   </ul>
-                  <div className="gothic-corner-tl !w-2 !h-2" />
+                  <div className="gothic-corner-tl !w-2 !h-2 !top-[-13px]" />
                   <div className="gothic-corner-br !w-2 !h-2" />
                 </motion.div>
 
@@ -315,7 +342,7 @@ export default function ArcStage({ activeTab, onOpenContract }) {
                   <p className="text-sm font-subhead text-[#E2E8F0] leading-relaxed">
                     {arc.resolution.text}
                   </p>
-                  <div className="gothic-corner-tr !w-2 !h-2" />
+                  <div className="gothic-corner-tr !w-2 !h-2 !top-[-12px]" />
                   <div className="gothic-corner-bl !w-2 !h-2" />
                 </motion.div>
               </div>

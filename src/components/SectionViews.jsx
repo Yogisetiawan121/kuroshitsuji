@@ -72,7 +72,6 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
               <p className="text-sm font-subhead text-[#E2E8F0] mt-2">
                 10th Earl of Phantomhive. Owner of Funtom Corp. Traded soul to avenge his family.
               </p>
-              <div className="gothic-corner-tr !w-2 !h-2" />
               <div className="gothic-corner-bl !w-2 !h-2" />
             </motion.div>
 
@@ -134,7 +133,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                 <p className="text-sm font-subhead italic text-[#718096] leading-relaxed">
                   "{c.text}"
                 </p>
-                <div className="gothic-corner-tr !w-1.5 !h-1.5" />
+                <div className="gothic-corner-tr !w-1.5 !h-1.5 !top-[-9px]" />
               </motion.div>
             ))}
           </div>
@@ -233,7 +232,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   </span>
                   <span className="text-[10px] font-mono text-[#718096]">4 HOUSES // P4 CONSPIRACY</span>
                 </div>
-                <div className="gothic-corner-tl !w-2 !h-2" />
+                <div className="gothic-corner-tl !w-2 !h-2 !top-[-17px]" />
                 <div className="gothic-corner-br !w-2 !h-2" />
               </motion.div>
 
@@ -269,7 +268,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   </span>
                   <span className="text-[10px] font-mono text-[#718096]">SULFUR GARDEN // WEREWOLVES</span>
                 </div>
-                <div className="gothic-corner-tr !w-2 !h-2" />
+                <div className="gothic-corner-tr !w-2 !h-2 !top-[-17px]" />
                 <div className="gothic-corner-bl !w-2 !h-2" />
               </motion.div>
             </div>
@@ -315,7 +314,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   {selectedArchive.summary}
                 </div>
               </div>
-              <div className="gothic-corner-tr !w-3 !h-3" />
+              <div className="gothic-corner-tr !w-3 !h-3 !top-[-17px]" />
             </motion.div>
           </div>
         </motion.div>
@@ -377,7 +376,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                 <p className="text-sm font-subhead italic text-[#718096] leading-relaxed">
                   "{mem.description}"
                 </p>
-                <div className="gothic-corner-tr !w-2 !h-2" />
+                <div className="gothic-corner-tr !w-2 !h-2 !top-[-12px]" />
                 <div className="gothic-corner-bl !w-2 !h-2" />
               </motion.div>
             ))}
