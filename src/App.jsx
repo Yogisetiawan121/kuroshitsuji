@@ -11,6 +11,7 @@ import AudioAmbience from './components/AudioAmbience';
 import { Volume2, VolumeX } from 'lucide-react';
 import { CHARACTERS } from './data/characterData';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('STATUS');
@@ -177,6 +178,9 @@ export default function App() {
 
       {/* Bottom Marquee Scrolling Ticker */}
       <BottomMarquee />
+
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
 
     </div>
   );
