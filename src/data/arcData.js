@@ -3,7 +3,7 @@ export const ARCS_DATA = {
     id: 'WESTON_COLLEGE',
     title: 'WESTON COLLEGE INFILTRATION',
     subtitle: 'PUBLIC SCHOOL ARC // MICHAELMAS TERM, 1889',
-    location: 'Weston College, Oxfordshire, England',
+    location: 'Weston College, Oxfordshire, United Kingdom',
     time: 'Michaelmas Term, 1889',
     classification: 'EDUCATIONAL INSTITUTION / CRIME SCENE',
     badgeColor: '#7A1F1F',
@@ -106,6 +106,7 @@ export const ARCS_DATA = {
         id: 'sieglinde',
         name: 'SIEGLINDE SULLIVAN',
         title: 'THE EMERALD WITCH / SCIENTIFIC PRODIGY',
+        image: '/img/Sieglinde%20Sullivan/Sieglinde%20Sullivan.webp',
         details: 'A thirteen-year-old girl raised in isolation within a giant tree-mansion. She believes herself to be the last of a line of witches, tasked by her "mother" (the Great Witch) to protect the village through ancient magic. In truth, she is a scientific prodigy gaslit into creating mass destruction weapons.',
         sulfurGarden: 'Developed the "Sulfur Garden" — a formula for a lethal, undetectable poison gas capable of mass destruction.'
       },
@@ -113,6 +114,7 @@ export const ARCS_DATA = {
         id: 'wolfram',
         name: 'WOLFRAM GELZER',
         title: 'MILITARY GUARD & DEVOTED BUTLER',
+        image: '/img/Wolfram%20Glezer/Wolfram%20Glezer%20.jpg',
         details: 'Sieglinde\'s devoted butler and bodyguard. Unlike Sebastian, his servitude is born of genuine affection and guilt. He knows the truth but protects Sieglinde from it, creating a tragic mirror to the Ciel-Sebastian dynamic.'
       }
     ],
@@ -151,7 +153,9 @@ export const ARCS_DATA = {
 
     images: [
       { url: '/img/Wolfsschlucht%20Forrest/wolfsschlucht%20forrest.png', caption: 'Wolfsschlucht Forest - The Cursed Realm' },
-      { url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop', caption: 'Subterranean Chemical Laboratory' }
+      { url: '/img/Sieglinde%20Sullivan/Sieglinde%20Sullivan%202.webp', caption: 'Sieglinde Sullivan - Scientific Genius' },
+      { url: '/img/Wolfram%20Glezer/Wolfram%20Glezer%20.jpg', caption: 'Wolfram Gelzer - Devoted Bodyguard' },
+      { url: '/img/Wolfram%20Glezer/Wolfram%20Glezer%202.jpg', caption: 'Wolfram Gelzer - Military Combat Specialist' }
     ]
   }
 };

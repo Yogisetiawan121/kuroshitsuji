@@ -246,7 +246,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                   <p className="text-sm font-subhead text-[#E2E8F0] leading-relaxed">
                     {arc.conspiracy.text}
                   </p>
-                  <div className="gothic-corner-tl !w-2 !h-2 " />
+                  <div className="gothic-corner-tl !w-2 !h-2 !top-[-12px]" />
                   <div className="gothic-corner-br !w-2 !h-2" />
                 </motion.div>
 
@@ -260,7 +260,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                   <p className="text-sm font-subhead text-[#E2E8F0] leading-relaxed">
                     {arc.cricketMatch.text}
                   </p>
-                  <div className="gothic-corner-tr !w-2 !h-2" />
+                  <div className="gothic-corner-tr !w-2 !h-2 !top-[-12px]" />
                   <div className="gothic-corner-bl !w-2 !h-2" />
                 </motion.div>
               </div>
@@ -287,15 +287,42 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                     <motion.div
                       key={char.id}
                       variants={itemVariants}
-                      className="p-6 bg-[#121214] border border-[#1B4D3E] relative space-y-3"
+                      className="p-6 bg-[#121214] border border-[#1B4D3E] relative space-y-4 group hover:border-[#9ACD32] transition-colors"
                     >
-                      <span className="text-xs font-mono text-[#9ACD32] font-bold tracking-widest block uppercase">
-                        {char.title}
-                      </span>
-                      <h4 className="text-2xl font-headline font-bold text-[#E2E8F0]">{char.name}</h4>
+                      {/* Character Portrait Image */}
+                      {char.image && (
+                        <div className="relative aspect-[16/10] overflow-hidden border bg-black border-[#4A5568]/40 group-hover:border-[#9ACD32]/60 transition-colors">
+                          <img
+                            src={char.image}
+                            alt={char.name}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
+                            }}
+                            className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-70" />
+                          <button
+                            onClick={() => handleOpenZoom({ url: char.image, caption: `${char.name} — ${char.title}` })}
+                            className="absolute top-2 right-2 p-1.5 bg-[#0A0A0A]/80 border border-[#9ACD32] text-[#E2E8F0] opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[#1B4D3E]"
+                            title="Zoom Character Portrait"
+                          >
+                            <Maximize2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      )}
+
+                      <div>
+                        <span className="text-xs font-mono text-[#9ACD32] font-bold tracking-widest block uppercase">
+                          {char.title}
+                        </span>
+                        <h4 className="text-2xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#9ACD32] transition-colors">{char.name}</h4>
+                      </div>
+
                       <p className="text-sm font-subhead text-[#E2E8F0] leading-relaxed">
                         {char.details}
                       </p>
+
                       {char.sulfurGarden && (
                         <div className="p-3 bg-[#0A0A0A] border border-[#9ACD32]/50 text-xs font-mono text-[#9ACD32] space-y-1">
                           <span className="font-bold flex items-center space-x-1">
@@ -305,7 +332,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                           <p className="text-[#E2E8F0] font-subhead text-xs">{char.sulfurGarden}</p>
                         </div>
                       )}
-                      <div className="gothic-corner-tl !w-2 !h-2 !top-[-13px]" />
+                      <div className="gothic-corner-tl !w-2 !h-2 !top-[-17px]" />
                       <div className="gothic-corner-br !w-2 !h-2" />
                     </motion.div>
                   ))}
