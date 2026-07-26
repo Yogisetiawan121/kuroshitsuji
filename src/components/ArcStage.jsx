@@ -27,14 +27,14 @@ const containerVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
   },
-  exit: { opacity: 0, y: -15, transition: { duration: 0.3 } }
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2, ease: 'easeIn' } }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
+   hidden: { opacity: 0, y: 15 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 20, mass: 0.8 } }
 };
 
 export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
@@ -54,7 +54,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
   };
 
   return (
-    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col space-y-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)]">
+    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col space-y-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)] pb-28 lg:pb-32">
       
       {/* Top Dossier Header & Arc Switcher */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
@@ -224,7 +224,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                         </p>
                       </div>
 
-                      <p className="text-xs font-subhead text-[#718096] mt-2 leading-snug">
+                      <p className="text-xs font-subhead text-[#CBD5E1] mt-2 leading-snug">
                         {house.description}
                       </p>
 

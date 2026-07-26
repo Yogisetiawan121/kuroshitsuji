@@ -57,7 +57,7 @@ export default function App() {
 
       {/* Main 3-Panel Layout Container */}
       <motion.div 
-        className="flex flex-col lg:flex-row min-h-screen pb-32 lg:pb-32 pt-20 lg:pt-0 lg:pl-[90px]"
+        className="flex flex-col lg:flex-row min-h-screen pb-7 lg:pb-7 pt-20 lg:pt-0 lg:pl-[90px]"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 20 }}

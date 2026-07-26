@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   GitBranch, 
   FileText, 
@@ -22,24 +22,26 @@ const viewContainerVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
+  },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2, ease: 'easeIn' } }
 };
 
 const viewItemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
+  hidden: { opacity: 0, y: 15 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 20, mass: 0.8 } }
 };
 
 export default function SectionViews({ activeTab, character, onOpenContract, setActiveTab }) {
   const [selectedArchive, setSelectedArchive] = useState(ARCHIVE_FILES[0]);
 
   return (
-    <div className="flex-1 min-w-0 p-4 lg:p-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)]">
+     <div className="flex-1 min-w-0 p-4 lg:p-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)] pb-28 lg:pb-32">
+        <AnimatePresence mode="wait">
       
       {/* LINEAGE & GENEALOGY VIEW */}
       {(activeTab === 'LINEAGE' || activeTab === 'GENEALOGY') && (
-        <motion.div variants={viewContainerVariants} initial="hidden" animate="show" className="space-y-6">
+       <motion.div key="lineage" variants={viewContainerVariants} initial="hidden" animate="show" exit="exit" className="space-y-6">
           <motion.div variants={viewItemVariants} className="border-b border-[#4A5568]/30 pb-4">
             <div className="flex items-center space-x-2 text-xs font-mono text-[#8B0000] tracking-widest uppercase font-bold">
               <GitBranch className="w-4 h-4" />
@@ -48,7 +50,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
             <h2 className="text-3xl font-headline font-bold text-[#E2E8F0] mt-1">
               THE WATCHDOG BLOODLINE
             </h2>
-            <p className="text-sm font-subhead italic text-[#718096] mt-1">
+            <p className="text-sm font-subhead italic text-[#CBD5E1] mt-1">
               "Behind the glittering facade of Victorian nobility lies the blood-stained mantle of the Queen's Watchdog."
             </p>
           </motion.div>
@@ -56,10 +58,10 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
           {/* Family Tree Hierarchy Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <motion.div variants={viewItemVariants} className="p-5 bg-[#121214] border border-[#4A5568]/40 relative">
-              <span className="text-xs font-mono text-[#718096] tracking-widest block uppercase font-semibold">PREVIOUS HEAD</span>
+              <span className="text-xs font-mono text-[#94A3B8] tracking-widest block uppercase font-semibold">PREVIOUS HEAD</span>
               <h3 className="text-xl font-headline font-bold text-[#E2E8F0] mt-1">Vincent Phantomhive</h3>
               <p className="text-sm font-mono text-[#8B0000] mt-0.5 font-bold">DECEASED (1888 FIRE)</p>
-              <p className="text-sm font-subhead text-[#718096] mt-2">
+              <p className="text-sm font-subhead text-[#CBD5E1] mt-2">
                 Former Queen's Watchdog. Murdered alongside Rachel Phantomhive on Ciel's 10th birthday.
               </p>
               <div className="gothic-corner-tl !w-2 !h-2" />
@@ -76,10 +78,10 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
             </motion.div>
 
             <motion.div variants={viewItemVariants} className="p-5 bg-[#121214] border border-[#4A5568]/40 relative">
-              <span className="text-xs font-mono text-[#718096] tracking-widest block uppercase font-semibold">INFERNAL EXECUTIVE</span>
+              <span className="text-xs font-mono text-[#94A3B8] tracking-widest block uppercase font-semibold">INFERNAL EXECUTIVE</span>
               <h3 className="text-xl font-headline font-bold text-[#E2E8F0] mt-1">Sebastian Michaelis</h3>
               <p className="text-sm font-mono text-[#8B0000] mt-0.5 font-bold">HEAD BUTLER / DEMON</p>
-              <p className="text-sm font-subhead text-[#718096] mt-2">
+              <p className="text-sm font-subhead text-[#CBD5E1] mt-2">
                 Demon bound by Faustian pact. Serves as head butler and absolute guardian of the lineage.
               </p>
               <div className="gothic-corner-br !w-2 !h-2" />
@@ -103,7 +105,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
 
       {/* CONTRACT VIEW */}
       {activeTab === 'CONTRACT' && (
-        <motion.div variants={viewContainerVariants} initial="hidden" animate="show" className="space-y-6">
+        <motion.div key="contract" variants={viewContainerVariants} initial="hidden" animate="show" exit="exit" className="space-y-6">
           <motion.div variants={viewItemVariants} className="border-b border-[#4A5568]/30 pb-4 flex justify-between items-end">
             <div>
               <div className="flex items-center space-x-2 text-xs font-mono text-[#8B0000] tracking-widest uppercase font-bold">
@@ -130,7 +132,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   ARTICLE {c.no}
                 </span>
                 <h4 className="text-base font-headline font-bold text-[#E2E8F0]">{c.title}</h4>
-                <p className="text-sm font-subhead italic text-[#718096] leading-relaxed">
+                <p className="text-sm font-subhead italic text-[#CBD5E1] leading-relaxed">
                   "{c.text}"
                 </p>
                 <div className="gothic-corner-tr !w-1.5 !h-1.5 !top-[-9px]" />
@@ -142,7 +144,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
 
       {/* ARSENAL VIEW */}
       {activeTab === 'ARSENAL' && (
-        <motion.div variants={viewContainerVariants} initial="hidden" animate="show" className="space-y-6">
+        <motion.div key="arsenal" variants={viewContainerVariants} initial="hidden" animate="show" exit="exit" className="space-y-6">
           <motion.div variants={viewItemVariants} className="border-b border-[#4A5568]/30 pb-4">
             <div className="flex items-center space-x-2 text-xs font-mono text-[#8B0000] tracking-widest uppercase font-bold">
               <Swords className="w-4 h-4" />
@@ -157,7 +159,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
             {character.arsenal.map((item, idx) => (
               <motion.div variants={viewItemVariants} key={idx} className="p-5 bg-[#121214] border border-[#4A5568]/40 space-y-3 relative group hover:border-[#8B0000] transition-colors">
                 <div className="flex justify-between items-start">
-                  <span className="text-xs font-mono text-[#718096] tracking-widest uppercase font-semibold">
+                  <span className="text-xs font-mono text-[#94A3B8] tracking-widest uppercase font-semibold">
                     {item.type}
                   </span>
                   <span className="px-2 py-0.5 bg-[#8B0000]/20 border border-[#8B0000] text-[#8B0000] text-xs font-mono font-bold tracking-widest">
@@ -169,7 +171,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   {item.title}
                 </h3>
 
-                <p className="text-sm font-mono text-[#718096] leading-relaxed">
+                <p className="text-sm font-mono text-[#CBD5E1] leading-relaxed">
                   {item.description}
                 </p>
                 <div className="gothic-corner-bl !w-2 !h-2" />
@@ -181,7 +183,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
 
       {/* ARCHIVE VIEW */}
       {activeTab === 'ARCHIVE' && (
-        <motion.div variants={viewContainerVariants} initial="hidden" animate="show" className="space-y-8">
+       <motion.div key="archive" variants={viewContainerVariants} initial="hidden" animate="show" exit="exit" className="space-y-8">
           <motion.div variants={viewItemVariants} className="border-b border-[#4A5568]/30 pb-4">
             <div className="flex items-center space-x-2 text-xs font-mono text-[#8B0000] tracking-widest uppercase font-bold">
               <Archive className="w-4 h-4" />
@@ -218,10 +220,10 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   <h3 className="text-2xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#8B7355] transition-colors">
                     WESTON COLLEGE INFILTRATION
                   </h3>
-                  <p className="text-xs font-mono text-[#718096] mt-1">Oxfordshire, England // Sapphire Owl Alias</p>
+                  <p className="text-xs font-mono text-[#94A3B8] mt-1">Oxfordshire, England // Sapphire Owl Alias</p>
                 </div>
 
-                <p className="text-sm font-subhead text-[#718096] line-clamp-3 leading-relaxed">
+                <p className="text-sm font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
                   {ARCS_DATA.WESTON_COLLEGE.missionBrief}
                 </p>
 
@@ -230,7 +232,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                     <span>ACCESS DOSSIER</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
-                  <span className="text-[10px] font-mono text-[#718096]">4 HOUSES // P4 CONSPIRACY</span>
+                  <span className="text-[10px] font-mono text-[#94A3B8]">4 HOUSES // P4 CONSPIRACY</span>
                 </div>
                 <div className="gothic-corner-tl !w-2 !h-2 !top-[-17px]" />
                 <div className="gothic-corner-br !w-2 !h-2" />
@@ -254,10 +256,10 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   <h3 className="text-2xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#9ACD32] transition-colors">
                     OPERATION WOLF'S GORGE
                   </h3>
-                  <p className="text-xs font-mono text-[#718096] mt-1">Wolfsschlucht, Black Forest, Germany</p>
+                  <p className="text-xs font-mono text-[#94A3B8] mt-1">Wolfsschlucht, Black Forest, Germany</p>
                 </div>
 
-                <p className="text-sm font-subhead text-[#718096] line-clamp-3 leading-relaxed">
+                <p className="text-sm font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
                   {ARCS_DATA.WOLFS_GORGE.missionBrief}
                 </p>
 
@@ -266,7 +268,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                     <span>ACCESS DOSSIER</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
-                  <span className="text-[10px] font-mono text-[#718096]">SULFUR GARDEN // WEREWOLVES</span>
+                  <span className="text-[10px] font-mono text-[#94A3B8]">SULFUR GARDEN // WEREWOLVES</span>
                 </div>
                 <div className="gothic-corner-tr !w-2 !h-2 !top-[-17px]" />
                 <div className="gothic-corner-bl !w-2 !h-2" />
@@ -322,7 +324,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
 
       {/* INVENTORY VIEW */}
       {activeTab === 'INVENTORY' && (
-        <motion.div variants={viewContainerVariants} initial="hidden" animate="show" className="space-y-6">
+       <motion.div key="inventory" variants={viewContainerVariants} initial="hidden" animate="show" exit="exit" className="space-y-6">
           <motion.div variants={viewItemVariants} className="border-b border-[#4A5568]/30 pb-4">
             <div className="flex items-center space-x-2 text-xs font-mono text-[#8B0000] tracking-widest uppercase font-bold">
               <Package className="w-4 h-4" />
@@ -338,7 +340,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
               <motion.div variants={viewItemVariants} key={idx} className="p-5 bg-[#121214] border border-[#4A5568]/40 relative group hover:border-[#8B0000] transition-colors">
                 <span className="text-xs font-mono text-[#8B0000] font-bold block">ITEM #00{idx + 1}</span>
                 <h4 className="text-lg font-headline font-bold text-[#E2E8F0] mt-1">{item.item}</h4>
-                <p className="text-sm font-mono text-[#718096] mt-2">{item.detail}</p>
+                <p className="text-sm font-mono text-[#CBD5E1] mt-2">{item.detail}</p>
                 <div className="gothic-corner-tl !w-2 !h-2" />
               </motion.div>
             ))}
@@ -348,7 +350,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
 
       {/* MEMORIES VIEW */}
       {activeTab === 'MEMORIES' && (
-        <motion.div variants={viewContainerVariants} initial="hidden" animate="show" className="space-y-6">
+         <motion.div key="memories" variants={viewContainerVariants} initial="hidden" animate="show" exit="exit" className="space-y-6">
           <motion.div variants={viewItemVariants} className="border-b border-[#4A5568]/30 pb-4">
             <div className="flex items-center space-x-2 text-xs font-mono text-[#8B0000] tracking-widest uppercase font-bold">
               <History className="w-4 h-4" />
@@ -366,14 +368,14 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                   <span className="px-2 py-0.5 bg-[#8B0000] text-white font-mono text-xs font-bold">
                     YEAR {mem.year}
                   </span>
-                  <span className="text-[10px] font-mono text-[#718096] tracking-widest uppercase">
+                  <span className="text-[10px] font-mono text-[#94A3B8] tracking-widest uppercase">
                     {mem.tag}
                   </span>
                 </div>
 
                 <h3 className="text-xl font-headline font-bold text-[#E2E8F0]">{mem.title}</h3>
                 <p className="text-xs font-mono text-[#8B0000]">{mem.subtitle}</p>
-                <p className="text-sm font-subhead italic text-[#718096] leading-relaxed">
+                <p className="text-sm font-subhead italic text-[#CBD5E1] leading-relaxed">
                   "{mem.description}"
                 </p>
                 <div className="gothic-corner-tr !w-2 !h-2 !top-[-12px]" />
@@ -384,6 +386,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
         </motion.div>
       )}
 
+      </AnimatePresence>
     </div>
   );
 }

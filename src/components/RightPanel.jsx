@@ -27,7 +27,7 @@ export default function RightPanel({ character, onOpenContract, activeTab = 'STA
       variants={panelVariants}
       initial="hidden"
       animate="show"
-      className="w-full lg:w-[380px] shrink-0 p-4 lg:p-6 bg-[#0A0A0A]/90 border-t lg:border-t-0 lg:border-l border-[#4A5568]/30 flex flex-col space-y-6 relative z-10 backdrop-blur-md"
+      className="w-full lg:w-[380px] shrink-0 p-4 lg:p-6 pb-28 lg:pb-32 bg-[#0A0A0A]/90 border-t lg:border-t-0 lg:border-l border-[#4A5568]/30 flex flex-col space-y-6 relative z-10 backdrop-blur-md min-h-full"
     >
       
       {/* Panel Header */}
@@ -189,7 +189,7 @@ export default function RightPanel({ character, onOpenContract, activeTab = 'STA
                   <span className="text-[#8B0000] mt-0.5">•</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-[#E2E8F0] text-sm font-bold truncate">{inv.item}</p>
-                    <p className="text-[#718096] text-[10px] tracking-wider mt-0.5">{inv.detail}</p>
+                    <p className="text-[#CBD5E1] text-xs tracking-wider mt-0.5">{inv.detail}</p>
                   </div>
                 </motion.li>
               ))}

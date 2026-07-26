@@ -9,14 +9,14 @@ const containerVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
   },
-  exit: { opacity: 0, y: -15, transition: { duration: 0.3 } }
+ exit: { opacity: 0, y: -10, transition: { duration: 0.2, ease: 'easeIn' } }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
+ hidden: { opacity: 0, y: 15 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 20, mass: 0.8 } }
 };
 
 export default function CenterStage({ 
@@ -35,7 +35,7 @@ export default function CenterStage({
   const currentImage = character.images[selectedImgIndex] || character.images[0];
 
   return (
-    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col justify-between space-y-8 relative z-10">
+    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col justify-between space-y-8 relative z-10 pb-28 lg:pb-32">
       
       {/* Top Header & Character Selector Toggle */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
