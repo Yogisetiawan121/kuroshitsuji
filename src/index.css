@@ -31,30 +31,6 @@
   --wolf-gray: #5A5A5A;       /* Mechanical suit metal */
   --sulfur-glow: #9ACD32;     /* Poison gas luminescence */
   --fairy-tale-pale: #D8CDBA; /* Aged parchment */
-
-  /* NOAH'S ARK CIRCUS COLOR TOKENS */
-  --circus-burgundy: #5C1A1B;     /* Velvet tent interior */
-  --sawdust-gold: #B8954F;        /* Aged brass fittings */
-  --greasepaint: #F5F5F5;         /* Performer makeup white */
-  --trapeze-silver: #A0A0A0;      /* Artificial limb steel */
-  --tent-stripe: #2A1A1A;         /* Deep shadow in canvas folds */
-  --scar-tissue: #8B4513;         /* Doll's hidden damage */
-
-  /* PHANTOMHIVE MANOR MURDERS COLOR TOKENS */
-  --blood-pool: #3E0000;        /* Dried blood on parquet */
-  --pipe-smoke: #6B7280;        /* Detective's gray haze */
-  --candle-amber: #D4A373;      /* Gaslight warmth */
-  --ivory-clue: #F5F5DC;        /* Aged evidence paper */
-  --mahogany: #3E2723;          /* Manor wood paneling */
-  --poison-bottle: #2E5A4C;     /* Tincture glass green */
-
-  /* THE CAMPANIA INCIDENT COLOR TOKENS */
-  --abyss-blue: #0F1C2E;        /* Deep Atlantic */
-  --ship-brass: #8B7355;        /* Nautical fittings */
-  --zombie-pale: #C8D6AF;       /* Bizarre Doll flesh */
-  --iceberg-silver: #C0C0C0;    /* Cold metal and death */
-  --elizabeth-pink: #D4A5A5;    /* Blood on pink silk */
-  --cinematic-sepia: #704214;   /* Film reel amber */
 }
 
 /* Weston Cricket Field Chalk Lines Overlay */
@@ -73,48 +49,6 @@
               radial-gradient(circle at 20% 80%, rgba(154, 205, 50, 0.08), transparent 50%);
   pointer-events: none;
   animation: mistPulse 8s ease-in-out infinite alternate;
-}
-
-/* Noah's Ark Circus Velvet Tent Stripe Overlay */
-.circus-tent-overlay {
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(92, 26, 27, 0.12),
-    rgba(92, 26, 27, 0.12) 30px,
-    rgba(42, 26, 26, 0.18) 30px,
-    rgba(42, 26, 26, 0.18) 60px
-  );
-  pointer-events: none;
-}
-
-/* Manor Murders Candlelight & Mahogany Overlay */
-.manor-gaslight-overlay {
-  background: radial-gradient(circle at 60% 40%, rgba(212, 163, 115, 0.08), transparent 60%),
-              radial-gradient(circle at 20% 80%, rgba(62, 0, 0, 0.15), transparent 70%);
-  pointer-events: none;
-  animation: candleFlicker 0.15s infinite alternate;
-}
-
-/* Campania Ocean Deep & Water Waterline Overlay */
-.campania-ocean-overlay {
-  background: linear-gradient(180deg, rgba(15, 28, 46, 0.2) 0%, rgba(15, 28, 46, 0.5) 100%);
-  pointer-events: none;
-}
-
-@keyframes candleFlicker {
-  0% { opacity: 0.88; }
-  50% { opacity: 1; }
-  100% { opacity: 0.94; }
-}
-
-@keyframes heatShimmer {
-  0% { filter: blur(0px); transform: translateY(0); }
-  50% { filter: blur(0.8px); transform: translateY(-1px); }
-  100% { filter: blur(0px); transform: translateY(0); }
-}
-
-.heat-shimmer {
-  animation: heatShimmer 2s ease-in-out infinite;
 }
 
 @keyframes mistPulse {

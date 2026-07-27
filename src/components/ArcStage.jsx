@@ -17,69 +17,46 @@ import {
   CheckCircle2,
   ChevronRight,
   Shield,
-  Layers,
-  Search,
-  Anchor,
-  GraduationCap,
-  TreePine
+  Layers
 } from 'lucide-react';
 import ScrambleText from './ScrambleText';
 import { ARCS_DATA } from '../data/arcData';
-import CircusArcView from './arcs/CircusArcView';
-import ManorMurdersArcView from './arcs/ManorMurdersArcView';
-import CampaniaArcView from './arcs/CampaniaArcView';
 
-// Seal Break Transition Variants (Black glass shatter & Crimson mist coalesce)
 const containerVariants = {
-  hidden: { opacity: 0, scale: 1.08, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 15 },
   show: {
     opacity: 1,
-    scale: 1,
-    filter: 'blur(0px)',
-    transition: { type: "spring", stiffness: 85, damping: 18, staggerChildren: 0.08 }
+    y: 0,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
   },
-  exit: {
-    opacity: 0,
-    scale: 0.82,
-    filter: 'blur(10px)',
-    transition: { duration: 0.25, ease: 'easeIn' }
-  }
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2, ease: 'easeIn' } }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
+   hidden: { opacity: 0, y: 15 },
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 20, mass: 0.8 } }
 };
 
 export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
-  const validArcKeys = ['WESTON_COLLEGE', 'WOLFS_GORGE', 'NOAHS_ARK', 'MANOR_MURDERS', 'THE_CAMPANIA'];
-  const arcKey = validArcKeys.includes(activeTab) ? activeTab : 'WESTON_COLLEGE';
-  const arc = ARCS_DATA[arcKey] || ARCS_DATA.WESTON_COLLEGE;
+  const arcKey = activeTab === 'WOLFS_GORGE' ? 'WOLFS_GORGE' : 'WESTON_COLLEGE';
+  const arc = ARCS_DATA[arcKey];
 
   const [selectedHouse, setSelectedHouse] = useState(0);
   const [selectedImgIndex, setSelectedImgIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomedImage, setZoomedImage] = useState(null);
 
-  const currentImage = arc.images ? (arc.images[selectedImgIndex] || arc.images[0]) : null;
+  const currentImage = arc.images[selectedImgIndex] || arc.images[0];
 
   const handleOpenZoom = (imgObj) => {
     setZoomedImage(imgObj);
     setIsZoomed(true);
   };
 
-  const arcButtons = [
-    { id: 'WESTON_COLLEGE', label: 'WESTON COLLEGE', icon: GraduationCap, color: '#7A1F1F' },
-    { id: 'WOLFS_GORGE', label: "WOLF'S GORGE", icon: TreePine, color: '#1B4D3E' },
-    { id: 'NOAHS_ARK', label: "NOAH'S ARK", icon: Sparkles, color: '#5C1A1B' },
-    { id: 'MANOR_MURDERS', label: 'MANOR MURDERS', icon: Search, color: '#7A1F1F' },
-    { id: 'THE_CAMPANIA', label: 'THE CAMPANIA', icon: Anchor, color: '#2C3E6B' },
-  ];
-
   return (
     <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col space-y-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)] pb-28 lg:pb-32">
       
-      {/* Top Dossier Header & Arc Switcher Bar */}
+      {/* Top Dossier Header & Arc Switcher */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
         <div>
           <div className="flex items-center space-x-2 text-xs font-mono tracking-[0.2em] text-[#718096]">
@@ -91,34 +68,35 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
           </p>
         </div>
 
-        {/* Direct Arc Switcher Controls for all 5 Arcs */}
-        <div className="flex flex-wrap items-center gap-1.5">
+        {/* Direct Arc Switcher Controls */}
+        <div className="flex flex-wrap items-center gap-2">
           {setActiveTab && (
             <>
-              {arcButtons.map((btn) => {
-                const Icon = btn.icon;
-                const isActive = activeTab === btn.id;
-                return (
-                  <button
-                    key={btn.id}
-                    onClick={() => setActiveTab(btn.id)}
-                    className={`px-2.5 py-1.5 font-mono text-[11px] tracking-wider uppercase border transition-all flex items-center space-x-1 ${
-                      isActive
-                        ? 'bg-white/10 text-white font-bold border-white/60 shadow-[0_0_12px_rgba(255,255,255,0.3)]'
-                        : 'bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#E2E8F0] hover:border-[#8B0000]/60'
-                    }`}
-                    style={{ borderColor: isActive ? btn.color : undefined }}
-                  >
-                    <Icon className="w-3 h-3" style={{ color: btn.color }} />
-                    <span>{btn.label}</span>
-                  </button>
-                );
-              })}
+              <button
+                onClick={() => setActiveTab('WESTON_COLLEGE')}
+                className={`px-3 py-1.5 font-mono text-xs tracking-widest uppercase border transition-all ${
+                  activeTab === 'WESTON_COLLEGE'
+                    ? 'bg-[#7A1F1F]/40 border-[#8B7355] text-[#E2E8F0] font-bold shadow-[0_0_10px_rgba(139,115,85,0.4)]'
+                    : 'bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#E2E8F0] hover:border-[#8B7355]/60'
+                }`}
+              >
+                WESTON COLLEGE
+              </button>
+              <button
+                onClick={() => setActiveTab('WOLFS_GORGE')}
+                className={`px-3 py-1.5 font-mono text-xs tracking-widest uppercase border transition-all ${
+                  activeTab === 'WOLFS_GORGE'
+                    ? 'bg-[#1B4D3E]/40 border-[#9ACD32] text-[#E2E8F0] font-bold shadow-[0_0_10px_rgba(154,205,50,0.4)]'
+                    : 'bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#E2E8F0] hover:border-[#9ACD32]/60'
+                }`}
+              >
+                WOLF'S GORGE
+              </button>
               <button
                 onClick={() => setActiveTab('ARCHIVE')}
-                className="px-2.5 py-1.5 font-mono text-[11px] tracking-wider uppercase border bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#8B0000] hover:border-[#8B0000]/60 transition-all"
+                className="px-3 py-1.5 font-mono text-xs tracking-widest uppercase border bg-[#121214] border-[#4A5568]/40 text-[#718096] hover:text-[#8B0000] hover:border-[#8B0000]/60 transition-all flex items-center space-x-1"
               >
-                ← ALL ARCS
+                <span>← ALL ARCHIVES</span>
               </button>
             </>
           )}
@@ -193,6 +171,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                       whileHover={{ scale: 1.02, y: -4 }}
                       onClick={() => {
                         setSelectedHouse(idx);
+                        // Find matching image index in main gallery if present
                         const galleryIdx = arc.images.findIndex(img => img.url === house.image);
                         if (galleryIdx !== -1) setSelectedImgIndex(galleryIdx);
                       }}
@@ -207,6 +186,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                       }}
                     >
                       <div>
+                        {/* Prefect Portrait Container */}
                         <div className="relative aspect-[3/4] mb-3 overflow-hidden border bg-black border-[#4A5568]/40 group-hover:border-white/40 transition-colors">
                           <img
                             src={house.image}
@@ -290,6 +270,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
           {/* ARC SPECIFIC CONTENT: WOLF'S GORGE */}
           {arcKey === 'WOLFS_GORGE' && (
             <>
+              {/* KEY CHARACTERS: SIEGLINDE & WOLFRAM */}
               <motion.div variants={itemVariants} className="space-y-4">
                 <div className="border-b border-[#4A5568]/30 pb-2 flex items-center justify-between">
                   <h3 className="text-xl font-headline font-bold text-[#E2E8F0] tracking-wider flex items-center space-x-2">
@@ -308,6 +289,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                       variants={itemVariants}
                       className="p-6 bg-[#121214] border border-[#1B4D3E] relative space-y-4 group hover:border-[#9ACD32] transition-colors"
                     >
+                      {/* Character Portrait Image */}
                       {char.image && (
                         <div className="relative aspect-[16/10] overflow-hidden border bg-black border-[#4A5568]/40 group-hover:border-[#9ACD32]/60 transition-colors">
                           <img
@@ -357,6 +339,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                 </div>
               </motion.div>
 
+              {/* HORROR REVEAL & RESOLUTION */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <motion.div variants={itemVariants} className="p-6 bg-[#121214] border border-[#4A6741]/60 relative space-y-3">
                   <div className="flex items-center space-x-2 text-xs font-mono text-[#9ACD32] font-bold tracking-widest uppercase">
@@ -393,99 +376,76 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
             </>
           )}
 
-          {/* ARC SPECIFIC CONTENT: NOAH'S ARK CIRCUS */}
-          {arcKey === 'NOAHS_ARK' && (
-            <CircusArcView arc={arc} handleOpenZoom={handleOpenZoom} />
-          )}
-
-          {/* ARC SPECIFIC CONTENT: PHANTOMHIVE MANOR MURDERS */}
-          {arcKey === 'MANOR_MURDERS' && (
-            <ManorMurdersArcView arc={arc} handleOpenZoom={handleOpenZoom} />
-          )}
-
-          {/* ARC SPECIFIC CONTENT: THE CAMPANIA INCIDENT */}
-          {arcKey === 'THE_CAMPANIA' && (
-            <CampaniaArcView arc={arc} handleOpenZoom={handleOpenZoom} />
-          )}
-
           {/* Visual Stills / Media Gallery Frame */}
-          {arc.images && arc.images.length > 0 && (
-            <motion.div variants={itemVariants} className="relative group">
-              <div className="relative ornate-frame bg-[#0A0A0A] overflow-hidden">
-                <div className="gothic-corner-tl" />
-                <div className="gothic-corner-tr" />
-                <div className="gothic-corner-bl" />
-                <div className="gothic-corner-br" />
+          <motion.div variants={itemVariants} className="relative group">
+            <div className="relative ornate-frame bg-[#0A0A0A] overflow-hidden">
+              <div className="gothic-corner-tl" />
+              <div className="gothic-corner-tr" />
+              <div className="gothic-corner-bl" />
+              <div className="gothic-corner-br" />
 
-                <div className="relative aspect-[16/9] overflow-hidden bg-black flex items-center justify-center">
-                  {currentImage && (
-                    <img
-                      src={currentImage.url}
-                      alt={arc.title}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
-                      }}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                    />
-                  )}
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80 pointer-events-none" />
+              <div className="relative aspect-[16/9] overflow-hidden bg-black flex items-center justify-center">
+                <img
+                  src={currentImage.url}
+                  alt={arc.title}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
+                  }}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80 pointer-events-none" />
 
-                  {currentImage && (
-                    <button
-                      onClick={() => handleOpenZoom(currentImage)}
-                      className="absolute top-4 right-4 p-2 bg-[#0A0A0A]/80 border border-[#8B0000] text-[#E2E8F0] opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#8B0000]"
-                      title="Expand Arc Image"
-                    >
-                      <Maximize2 className="w-4 h-4" />
-                    </button>
-                  )}
+                <button
+                  onClick={() => handleOpenZoom(currentImage)}
+                  className="absolute top-4 right-4 p-2 bg-[#0A0A0A]/80 border border-[#8B0000] text-[#E2E8F0] opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#8B0000]"
+                  title="Expand Arc Image"
+                >
+                  <Maximize2 className="w-4 h-4" />
+                </button>
 
-                  {currentImage && (
-                    <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end pointer-events-none">
-                      <div className="bg-[#0A0A0A]/80 border border-[#4A5568]/60 px-3 py-1.5 text-xs font-mono text-[#E2E8F0] tracking-widest backdrop-blur-md">
-                        {currentImage.caption}
-                      </div>
-                      <span className="text-xs font-mono text-[#718096] tracking-widest">
-                        STILL {selectedImgIndex + 1} OF {arc.images.length}
-                      </span>
-                    </div>
-                  )}
+                <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end pointer-events-none">
+                  <div className="bg-[#0A0A0A]/80 border border-[#4A5568]/60 px-3 py-1.5 text-xs font-mono text-[#E2E8F0] tracking-widest backdrop-blur-md">
+                    {currentImage.caption}
+                  </div>
+                  <span className="text-xs font-mono text-[#718096] tracking-widest">
+                    STILL {selectedImgIndex + 1} OF {arc.images.length}
+                  </span>
                 </div>
               </div>
+            </div>
 
-              {/* Thumbnail selector strip */}
-              <div className="flex items-center space-x-3 mt-3 overflow-x-auto no-scrollbar py-1">
-                <span className="text-[10px] font-mono text-[#718096] tracking-widest shrink-0 uppercase flex items-center space-x-1">
-                  <Layers className="w-3 h-3 text-[#8B0000]" />
-                  <span>ARC ARCHIVE STILLS:</span>
-                </span>
+            {/* Thumbnail selector strip */}
+            <div className="flex items-center space-x-3 mt-3 overflow-x-auto no-scrollbar py-1">
+              <span className="text-[10px] font-mono text-[#718096] tracking-widest shrink-0 uppercase flex items-center space-x-1">
+                <Layers className="w-3 h-3 text-[#8B0000]" />
+                <span>ARC ARCHIVE STILLS:</span>
+              </span>
 
-                {arc.images.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedImgIndex(idx)}
-                    className={`relative w-16 h-10 shrink-0 border overflow-hidden transition-all duration-300 ${
-                      selectedImgIndex === idx
-                        ? 'border-[#8B0000] shadow-[0_0_10px_rgba(139,0,0,0.6)] scale-105'
-                        : 'border-[#4A5568]/40 opacity-50 hover:opacity-100 hover:border-[#8B0000]/60'
-                    }`}
-                  >
-                    <img 
-                      src={img.url} 
-                      alt="" 
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
-                      }}
-                      className="w-full h-full object-cover grayscale" 
-                    />
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
+              {arc.images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedImgIndex(idx)}
+                  className={`relative w-16 h-10 shrink-0 border overflow-hidden transition-all duration-300 ${
+                    selectedImgIndex === idx
+                      ? 'border-[#8B0000] shadow-[0_0_10px_rgba(139,0,0,0.6)] scale-105'
+                      : 'border-[#4A5568]/40 opacity-50 hover:opacity-100 hover:border-[#8B0000]/60'
+                  }`}
+                >
+                  <img 
+                    src={img.url} 
+                    alt="" 
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
+                    }}
+                    className="w-full h-full object-cover grayscale" 
+                  />
+                </button>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </AnimatePresence>
 
@@ -500,7 +460,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
             onClick={(e) => e.stopPropagation()}
           >
             <img 
-              src={zoomedImage?.url || (currentImage ? currentImage.url : '')} 
+              src={zoomedImage?.url || currentImage.url} 
               alt="" 
               onError={(e) => {
                 e.target.onerror = null;
@@ -509,7 +469,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
               className="max-w-full max-h-[80vh] object-contain" 
             />
             <p className="text-center text-xs font-mono text-[#E2E8F0] tracking-widest mt-2">
-              {zoomedImage?.caption || (currentImage ? currentImage.caption : '')} // RESTRICTED ARC ARCHIVE
+              {zoomedImage?.caption || currentImage.caption} // RESTRICTED ARC ARCHIVE
             </p>
           </div>
         </div>
