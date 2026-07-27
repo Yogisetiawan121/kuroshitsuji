@@ -21,6 +21,9 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
 
     const isWeston = activeTab === 'WESTON_COLLEGE';
     const isWolfsGorge = activeTab === 'WOLFS_GORGE';
+    const isCircus = activeTab === 'NOAHS_ARK';
+    const isMurder = activeTab === 'MANOR_MURDERS';
+    const isAtlantic = activeTab === 'THE_CAMPANIA';
 
     const particleCount = Math.floor((width * height) / 16000);
     const particles = [];
@@ -56,6 +59,48 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
         speedX = (Math.random() - 0.5) * 0.4;
         speedY = -Math.random() * 0.5 - 0.1;
         shadowColor = '#9ACD32';
+      } else if (isCircus) {
+        // Noah's Ark Circus: Sawdust gold dust & rising red/orange circus embers
+        const rand = Math.random();
+        if (rand > 0.5) {
+          color = 'rgba(184, 149, 79, '; // sawdust gold
+        } else if (rand > 0.25) {
+          color = 'rgba(139, 0, 0, ';    // circus crimson
+        } else {
+          color = 'rgba(245, 245, 245, '; // greasepaint white
+        }
+        radius = Math.random() * 2.2 + 0.5;
+        speedX = (Math.random() - 0.5) * 0.3;
+        speedY = -Math.random() * 0.6 - 0.1;
+        shadowColor = '#B8954F';
+      } else if (isMurder) {
+        // Manor Murders: Gentle falling snow & candle smoke haze
+        const rand = Math.random();
+        if (rand > 0.6) {
+          color = 'rgba(245, 245, 220, '; // ivory clue
+        } else if (rand > 0.3) {
+          color = 'rgba(107, 114, 128, '; // pipe smoke gray
+        } else {
+          color = 'rgba(212, 163, 115, '; // candle amber
+        }
+        radius = Math.random() * 2.0 + 0.4;
+        speedX = (Math.random() - 0.5) * 0.2;
+        speedY = Math.random() * 0.4 + 0.1; // falling down like snow
+        shadowColor = '#D4A373';
+      } else if (isAtlantic) {
+        // The Campania Incident: Deep ocean spray, drifting bubbles & Atlantic water particles
+        const rand = Math.random();
+        if (rand > 0.5) {
+          color = 'rgba(15, 28, 46, ';   // abyss blue
+        } else if (rand > 0.25) {
+          color = 'rgba(200, 214, 175, '; // zombie pale
+        } else {
+          color = 'rgba(192, 192, 192, '; // iceberg silver
+        }
+        radius = Math.random() * 3.0 + 0.6;
+        speedX = (Math.random() - 0.5) * 0.5;
+        speedY = -Math.random() * 0.7 - 0.1; // rising water bubbles
+        shadowColor = '#0F1C2E';
       } else {
         // Default Gothic Ember Particles
         const rand = Math.random();
@@ -85,17 +130,24 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
       time += 0.015;
 
       particles.forEach((p) => {
-        if (isWolfsGorge) {
-          // Sinusoidal wind sway for toxic mist
-          p.x += p.speedX + Math.sin(time + p.phase) * 0.3;
+        if (isWolfsGorge || isAtlantic) {
+          // Sinusoidal wind/water sway
+          p.x += p.speedX + Math.sin(time + p.phase) * 0.35;
         } else {
           p.x += p.speedX;
         }
         p.y += p.speedY;
 
-        if (p.y < 0) {
-          p.y = height;
-          p.x = Math.random() * width;
+        if (isMurder) {
+          if (p.y > height) {
+            p.y = 0;
+            p.x = Math.random() * width;
+          }
+        } else {
+          if (p.y < 0) {
+            p.y = height;
+            p.x = Math.random() * width;
+          }
         }
         if (p.x < 0) p.x = width;
         if (p.x > width) p.x = 0;
@@ -103,7 +155,7 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${p.opacity})`;
-        ctx.shadowBlur = p.radius > 1 ? (isWolfsGorge ? 10 : 6) : 0;
+        ctx.shadowBlur = p.radius > 1 ? 8 : 0;
         ctx.shadowColor = p.shadowColor;
         ctx.fill();
       });
@@ -123,7 +175,7 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
     <canvas
       ref={canvasRef}
       className={`fixed inset-0 pointer-events-none z-0 transition-opacity duration-700 ${
-        activeTab === 'WOLFS_GORGE' ? 'opacity-80' : 'opacity-65'
+        activeTab === 'WOLFS_GORGE' || activeTab === 'THE_CAMPANIA' ? 'opacity-80' : 'opacity-65'
       }`}
     />
   );

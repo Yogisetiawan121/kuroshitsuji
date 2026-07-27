@@ -1,5 +1,5 @@
 node_modules/
-.dist
+dist/
 .vite/
 
 # Environment files
@@ -33,4 +33,5 @@ npm-debug.log*
 # freebuff
 .freebuff
 
+img/
 .D

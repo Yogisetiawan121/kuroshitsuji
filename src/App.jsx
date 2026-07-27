@@ -27,7 +27,7 @@ export default function App() {
     restDelta: 0.001
   });
 
-  const isArcView = activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE';
+  const isArcView = activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE' || activeTab === 'NOAHS_ARK' || activeTab === 'MANOR_MURDERS' || activeTab === 'THE_CAMPANIA';
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-[#E2E8F0] font-body relative overflow-x-hidden">
@@ -47,6 +47,15 @@ export default function App() {
       )}
       {activeTab === 'WOLFS_GORGE' && (
         <div className="fixed inset-0 emerald-mist-overlay z-10 pointer-events-none opacity-90 transition-opacity duration-700" />
+      )}
+      {activeTab === 'NOAHS_ARK' && (
+        <div className="fixed inset-0 circus-velvet-overlay z-10 pointer-events-none opacity-85 transition-opacity duration-700 bg-gradient-to-b from-[#5C1A1B]/20 via-transparent to-[#0A0A0A]" />
+      )}
+      {activeTab === 'MANOR_MURDERS' && (
+        <div className="fixed inset-0 manor-smoke-overlay z-10 pointer-events-none opacity-85 transition-opacity duration-700 bg-gradient-to-b from-[#3E0000]/25 via-transparent to-[#0A0A0A]" />
+      )}
+      {activeTab === 'THE_CAMPANIA' && (
+        <div className="fixed inset-0 atlantic-abyss-overlay z-10 pointer-events-none opacity-90 transition-opacity duration-700 bg-gradient-to-b from-[#0F1C2E]/40 via-transparent to-[#0A0A0A]" />
       )}
 
       {/* Scanline Overlay (0.03 Opacity) */}

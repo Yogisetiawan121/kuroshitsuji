@@ -18,9 +18,9 @@ const itemVariants = {
 };
 
 export default function RightPanel({ character, onOpenContract, activeTab = 'STATUS' }) {
-  const isArcTab = activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE';
-  const arcKey = activeTab === 'WOLFS_GORGE' ? 'WOLFS_GORGE' : 'WESTON_COLLEGE';
-  const arc = ARCS_DATA[arcKey];
+  const isArcTab = activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE' || activeTab === 'NOAHS_ARK' || activeTab === 'MANOR_MURDERS' || activeTab === 'THE_CAMPANIA';
+  const arcKey = isArcTab ? activeTab : 'WESTON_COLLEGE';
+  const arc = ARCS_DATA[arcKey] || ARCS_DATA.WESTON_COLLEGE;
 
   return (
     <motion.aside 

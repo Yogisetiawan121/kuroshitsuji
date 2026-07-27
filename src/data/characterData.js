@@ -246,10 +246,24 @@ export const ARCHIVE_FILES = [
     summary: 'Autopsy reports on Bizarre Dolls, cinematic records tampering, and reanimated corpses utilizing artificial memory cassettes.',
   },
   {
-    code: 'FILE-089/FN',
-    title: 'FUNTOM CORPORATION FINANCIAL LEDGER',
-    classification: 'CONFIDENTIAL // ARISTOCRACY',
-    date: '01 DEC 1889',
-    summary: 'Quarterly profits of confectioneries and toy manufacture masking secret funding for the Watchdog intelligence cell.',
+    code: 'FILE-066/BK',
+    title: 'NOAH\'S ARK & KELVIN ESTATE DOSSIER',
+    classification: 'RESTRICTED // PROSTHETICS',
+    date: '15 APR 1889',
+    summary: 'Investigation notes on Baron Kelvin\'s workhouse child abduction ring, Doctor\'s bone prosthetics, and the first tier performers.',
+  },
+  {
+    code: 'FILE-077/WC',
+    title: 'WESTON COLLEGE PREFECT DOSSIER',
+    classification: 'CONFIDENTIAL // ACADEMIC',
+    date: '22 SEP 1889',
+    summary: 'Confidential reports on the Derrick Arden bludgeoning cover-up, the P4 prefects, and Sapphire Owl dormitory tactics.',
+  },
+  {
+    code: 'FILE-088/MM',
+    title: 'MANOR MURDERS & DISGUISE RECORD',
+    classification: 'TOP SECRET // WATCHDOG',
+    date: '18 NOV 1889',
+    summary: 'Staged murder investigation notes by Jeremy Rathbone (Sebastian in disguise) exposing Karl Woodley\'s extortion syndicate.',
   }
 ];
