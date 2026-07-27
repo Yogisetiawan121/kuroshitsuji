@@ -21,6 +21,9 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
 
     const isWeston = activeTab === 'WESTON_COLLEGE';
     const isWolfsGorge = activeTab === 'WOLFS_GORGE';
+    const isCircus = activeTab === 'NOAHS_ARK';
+    const isManor = activeTab === 'MANOR_MURDERS';
+    const isCampania = activeTab === 'THE_CAMPANIA';
 
     const particleCount = Math.floor((width * height) / 16000);
     const particles = [];
@@ -56,6 +59,48 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
         speedX = (Math.random() - 0.5) * 0.4;
         speedY = -Math.random() * 0.5 - 0.1;
         shadowColor = '#9ACD32';
+      } else if (isCircus) {
+        // Noah's Ark Circus: Embers and sawdust gold drifting upward
+        const rand = Math.random();
+        if (rand > 0.6) {
+          color = 'rgba(184, 149, 79, '; // sawdust gold
+        } else if (rand > 0.2) {
+          color = 'rgba(180, 50, 40, ';  // circus ember
+        } else {
+          color = 'rgba(245, 245, 245, '; // greasepaint ash
+        }
+        radius = Math.random() * 2.2 + 0.5;
+        speedX = (Math.random() - 0.5) * 0.3;
+        speedY = -Math.random() * 0.6 - 0.2; // floats upward like embers
+        shadowColor = '#B8954F';
+      } else if (isManor) {
+        // Manor Murders: Candle smoke & falling winter snow
+        const rand = Math.random();
+        if (rand > 0.5) {
+          color = 'rgba(212, 163, 115, '; // candle amber
+        } else if (rand > 0.2) {
+          color = 'rgba(245, 245, 220, '; // ivory snow
+        } else {
+          color = 'rgba(107, 114, 128, '; // pipe smoke
+        }
+        radius = Math.random() * 2.0 + 0.4;
+        speedX = (Math.random() - 0.5) * 0.2;
+        speedY = Math.random() * 0.4 + 0.1; // falls gently like snow
+        shadowColor = '#D4A373';
+      } else if (isCampania) {
+        // The Campania: Sea spray & rising underwater bubbles
+        const rand = Math.random();
+        if (rand > 0.5) {
+          color = 'rgba(192, 192, 192, '; // iceberg silver
+        } else if (rand > 0.2) {
+          color = 'rgba(200, 214, 175, '; // zombie pale
+        } else {
+          color = 'rgba(15, 60, 100, ';   // abyss ocean blue
+        }
+        radius = Math.random() * 2.5 + 0.6;
+        speedX = (Math.random() - 0.5) * 0.5;
+        speedY = -Math.random() * 0.4 - 0.15; // rising bubbles
+        shadowColor = '#0F1C2E';
       } else {
         // Default Gothic Ember Particles
         const rand = Math.random();

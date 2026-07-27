@@ -198,18 +198,18 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
           <motion.div variants={viewItemVariants} className="space-y-4">
             <div className="flex items-center space-x-2 text-xs font-mono text-[#8B7355] tracking-widest uppercase font-bold">
               <Sparkles className="w-4 h-4 text-[#8B7355]" />
-              <span>FEATURED STORY ARCS // MAJOR INVESTIGATIONS</span>
+              <span>FEATURED STORY ARCS // ALL 5 MAJOR INVESTIGATIONS</span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Weston College Launcher */}
               <motion.div 
                 whileHover={{ y: -4, scale: 1.01 }}
                 onClick={() => setActiveTab && setActiveTab('WESTON_COLLEGE')}
-                className="p-6 bg-[#121214] border-2 border-[#7A1F1F] hover:border-[#8B7355] cursor-pointer relative space-y-4 shadow-[0_0_20px_rgba(122,31,31,0.25)] transition-all group"
+                className="p-5 bg-[#121214] border-2 border-[#7A1F1F] hover:border-[#8B7355] cursor-pointer relative space-y-3 shadow-[0_0_20px_rgba(122,31,31,0.25)] transition-all group"
               >
                 <div className="flex justify-between items-start">
-                  <span className="px-2.5 py-1 bg-[#7A1F1F]/30 border border-[#7A1F1F] text-[#E2E8F0] font-mono text-[10px] tracking-widest uppercase font-bold flex items-center space-x-1">
+                  <span className="px-2 py-0.5 bg-[#7A1F1F]/30 border border-[#7A1F1F] text-[#E2E8F0] font-mono text-[9px] tracking-widest uppercase font-bold flex items-center space-x-1">
                     <GraduationCap className="w-3.5 h-3.5 text-[#8B7355]" />
                     <span>PUBLIC SCHOOL ARC</span>
                   </span>
@@ -217,22 +217,22 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#8B7355] transition-colors">
+                  <h3 className="text-xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#8B7355] transition-colors">
                     WESTON COLLEGE INFILTRATION
                   </h3>
-                  <p className="text-xs font-mono text-[#94A3B8] mt-1">Oxfordshire, England // Sapphire Owl Alias</p>
+                  <p className="text-[10px] font-mono text-[#94A3B8] mt-0.5">Oxfordshire, England</p>
                 </div>
 
-                <p className="text-sm font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
+                <p className="text-xs font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
                   {ARCS_DATA.WESTON_COLLEGE.missionBrief}
                 </p>
 
                 <div className="pt-2 flex items-center justify-between border-t border-[#4A5568]/30">
-                  <span className="text-xs font-mono text-[#8B7355] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
+                  <span className="text-[11px] font-mono text-[#8B7355] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
                     <span>ACCESS DOSSIER</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3 h-3" />
                   </span>
-                  <span className="text-[10px] font-mono text-[#94A3B8]">4 HOUSES // P4 CONSPIRACY</span>
+                  <span className="text-[9px] font-mono text-[#94A3B8]">4 HOUSES</span>
                 </div>
                 <div className="gothic-corner-tl !w-2 !h-2 !top-[-17px]" />
                 <div className="gothic-corner-br !w-2 !h-2" />
@@ -242,36 +242,144 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
               <motion.div 
                 whileHover={{ y: -4, scale: 1.01 }}
                 onClick={() => setActiveTab && setActiveTab('WOLFS_GORGE')}
-                className="p-6 bg-[#121214] border-2 border-[#1B4D3E] hover:border-[#9ACD32] cursor-pointer relative space-y-4 shadow-[0_0_20px_rgba(27,77,62,0.3)] transition-all group"
+                className="p-5 bg-[#121214] border-2 border-[#1B4D3E] hover:border-[#9ACD32] cursor-pointer relative space-y-3 shadow-[0_0_20px_rgba(27,77,62,0.3)] transition-all group"
               >
                 <div className="flex justify-between items-start">
-                  <span className="px-2.5 py-1 bg-[#1B4D3E]/40 border border-[#1B4D3E] text-[#9ACD32] font-mono text-[10px] tracking-widest uppercase font-bold flex items-center space-x-1">
+                  <span className="px-2 py-0.5 bg-[#1B4D3E]/40 border border-[#1B4D3E] text-[#9ACD32] font-mono text-[9px] tracking-widest uppercase font-bold flex items-center space-x-1">
                     <TreePine className="w-3.5 h-3.5 text-[#9ACD32]" />
                     <span>EMERALD WITCH ARC</span>
                   </span>
-                  <span className="text-xs font-mono text-[#9ACD32]">WINTER 1889</span>
+                  <span className="text-xs font-mono text-[#9ACD32]">1889</span>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#9ACD32] transition-colors">
+                  <h3 className="text-xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#9ACD32] transition-colors">
                     OPERATION WOLF'S GORGE
                   </h3>
-                  <p className="text-xs font-mono text-[#94A3B8] mt-1">Wolfsschlucht, Black Forest, Germany</p>
+                  <p className="text-[10px] font-mono text-[#94A3B8] mt-0.5">Black Forest, Germany</p>
                 </div>
 
-                <p className="text-sm font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
+                <p className="text-xs font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
                   {ARCS_DATA.WOLFS_GORGE.missionBrief}
                 </p>
 
                 <div className="pt-2 flex items-center justify-between border-t border-[#4A5568]/30">
-                  <span className="text-xs font-mono text-[#9ACD32] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
+                  <span className="text-[11px] font-mono text-[#9ACD32] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
                     <span>ACCESS DOSSIER</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3 h-3" />
                   </span>
-                  <span className="text-[10px] font-mono text-[#94A3B8]">SULFUR GARDEN // WEREWOLVES</span>
+                  <span className="text-[9px] font-mono text-[#94A3B8]">SULFUR GARDEN</span>
                 </div>
                 <div className="gothic-corner-tr !w-2 !h-2 !top-[-17px]" />
                 <div className="gothic-corner-bl !w-2 !h-2" />
+              </motion.div>
+
+              {/* Noah's Ark Circus Launcher */}
+              <motion.div 
+                whileHover={{ y: -4, scale: 1.01 }}
+                onClick={() => setActiveTab && setActiveTab('NOAHS_ARK')}
+                className="p-5 bg-[#121214] border-2 border-[#5C1A1B] hover:border-[#B8954F] cursor-pointer relative space-y-3 shadow-[0_0_20px_rgba(92,26,27,0.4)] transition-all group"
+              >
+                <div className="flex justify-between items-start">
+                  <span className="px-2 py-0.5 bg-[#5C1A1B]/40 border border-[#5C1A1B] text-[#F5F5F5] font-mono text-[9px] tracking-widest uppercase font-bold flex items-center space-x-1">
+                    <Sparkles className="w-3.5 h-3.5 text-[#B8954F]" />
+                    <span>BOOK OF CIRCUS</span>
+                  </span>
+                  <span className="text-xs font-mono text-[#B8954F]">SPRING 1889</span>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#B8954F] transition-colors">
+                    NOAH'S ARK CIRCUS INFILTRATION
+                  </h3>
+                  <p className="text-[10px] font-mono text-[#94A3B8] mt-0.5">Kelvin Estate // London Outskirts</p>
+                </div>
+
+                <p className="text-xs font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
+                  {ARCS_DATA.NOAHS_ARK.missionBrief}
+                </p>
+
+                <div className="pt-2 flex items-center justify-between border-t border-[#4A5568]/30">
+                  <span className="text-[11px] font-mono text-[#B8954F] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
+                    <span>ACCESS DOSSIER</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </span>
+                  <span className="text-[9px] font-mono text-[#94A3B8]">FIRST TIER PERFORMERS</span>
+                </div>
+                <div className="gothic-corner-tl !w-2 !h-2 !top-[-17px]" />
+                <div className="gothic-corner-br !w-2 !h-2" />
+              </motion.div>
+
+              {/* Manor Murders Launcher */}
+              <motion.div 
+                whileHover={{ y: -4, scale: 1.01 }}
+                onClick={() => setActiveTab && setActiveTab('MANOR_MURDERS')}
+                className="p-5 bg-[#121214] border-2 border-[#3E0000] hover:border-[#D4A373] cursor-pointer relative space-y-3 shadow-[0_0_20px_rgba(62,0,0,0.5)] transition-all group"
+              >
+                <div className="flex justify-between items-start">
+                  <span className="px-2 py-0.5 bg-[#3E0000]/40 border border-[#3E0000] text-[#D4A373] font-mono text-[9px] tracking-widest uppercase font-bold flex items-center space-x-1">
+                    <Sparkles className="w-3.5 h-3.5 text-[#D4A373]" />
+                    <span>BOOK OF MURDER</span>
+                  </span>
+                  <span className="text-xs font-mono text-[#D4A373]">WINTER 1889</span>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#D4A373] transition-colors">
+                    PHANTOMHIVE MANOR MURDERS
+                  </h3>
+                  <p className="text-[10px] font-mono text-[#94A3B8] mt-0.5">Phantomhive Manor // Locked Room</p>
+                </div>
+
+                <p className="text-xs font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
+                  {ARCS_DATA.MANOR_MURDERS.missionBrief}
+                </p>
+
+                <div className="pt-2 flex items-center justify-between border-t border-[#4A5568]/30">
+                  <span className="text-[11px] font-mono text-[#D4A373] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
+                    <span>ACCESS DOSSIER</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </span>
+                  <span className="text-[9px] font-mono text-[#94A3B8]">JEREMY RATHBONE</span>
+                </div>
+                <div className="gothic-corner-tr !w-2 !h-2 !top-[-17px]" />
+                <div className="gothic-corner-bl !w-2 !h-2" />
+              </motion.div>
+
+              {/* Campania Incident Launcher */}
+              <motion.div 
+                whileHover={{ y: -4, scale: 1.01 }}
+                onClick={() => setActiveTab && setActiveTab('THE_CAMPANIA')}
+                className="p-5 bg-[#121214] border-2 border-[#0F1C2E] hover:border-[#C0C0C0] cursor-pointer relative space-y-3 shadow-[0_0_20px_rgba(15,28,46,0.6)] transition-all group col-span-1 md:col-span-2 lg:col-span-1"
+              >
+                <div className="flex justify-between items-start">
+                  <span className="px-2 py-0.5 bg-[#0F1C2E] border border-[#0F1C2E] text-[#C0C0C0] font-mono text-[9px] tracking-widest uppercase font-bold flex items-center space-x-1">
+                    <Sparkles className="w-3.5 h-3.5 text-[#C0C0C0]" />
+                    <span>BOOK OF ATLANTIC</span>
+                  </span>
+                  <span className="text-xs font-mono text-[#C0C0C0]">APRIL 1889</span>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-headline font-bold text-[#E2E8F0] group-hover:text-[#C0C0C0] transition-colors">
+                    THE CAMPANIA INCIDENT
+                  </h3>
+                  <p className="text-[10px] font-mono text-[#94A3B8] mt-0.5">RMS Campania // North Atlantic</p>
+                </div>
+
+                <p className="text-xs font-subhead text-[#CBD5E1] line-clamp-3 leading-relaxed">
+                  {ARCS_DATA.THE_CAMPANIA.missionBrief}
+                </p>
+
+                <div className="pt-2 flex items-center justify-between border-t border-[#4A5568]/30">
+                  <span className="text-[11px] font-mono text-[#C0C0C0] tracking-widest uppercase font-bold flex items-center space-x-1 group-hover:translate-x-1 transition-transform">
+                    <span>ACCESS DOSSIER</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </span>
+                  <span className="text-[9px] font-mono text-[#94A3B8]">BIZARRE DOLLS // UNDERTAKER</span>
+                </div>
+                <div className="gothic-corner-tl !w-2 !h-2 !top-[-17px]" />
+                <div className="gothic-corner-br !w-2 !h-2" />
               </motion.div>
             </div>
           </motion.div>

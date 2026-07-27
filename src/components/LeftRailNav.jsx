@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { 
   Shield, 
   GitBranch, 
@@ -14,6 +13,9 @@ import {
   VolumeX,
   GraduationCap,
   TreePine,
+  Sparkles,
+  Search,
+  Anchor,
   CornerDownRight,
   ChevronRight
 } from 'lucide-react';
@@ -35,7 +37,8 @@ const navItemVariants = {
 export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, isAudioMuted, toggleAudio }) {
   const [isArchiveHovered, setIsArchiveHovered] = useState(false);
 
-  const isArchiveFamilyActive = activeTab === 'ARCHIVE' || activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE';
+  const archiveArcIds = ['WESTON_COLLEGE', 'WOLFS_GORGE', 'NOAHS_ARK', 'MANOR_MURDERS', 'THE_CAMPANIA'];
+  const isArchiveFamilyActive = activeTab === 'ARCHIVE' || archiveArcIds.includes(activeTab);
 
   const navItems = [
     { id: 'STATUS', label: 'STATUS', icon: Shield },
@@ -50,6 +53,9 @@ export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, 
       subitems: [
         { id: 'WESTON_COLLEGE', label: 'WESTON COLLEGE', tag: 'Public School Arc', icon: GraduationCap, color: '#7A1F1F' },
         { id: 'WOLFS_GORGE', label: "WOLF'S GORGE", tag: 'Emerald Witch Arc', icon: TreePine, color: '#1B4D3E' },
+        { id: 'NOAHS_ARK', label: "NOAH'S ARK", tag: 'Book of Circus', icon: Sparkles, color: '#5C1A1B' },
+        { id: 'MANOR_MURDERS', label: 'MANOR MURDERS', tag: 'Book of Murder', icon: Search, color: '#7A1F1F' },
+        { id: 'THE_CAMPANIA', label: 'THE CAMPANIA', tag: 'Book of Atlantic', icon: Anchor, color: '#2C3E6B' },
       ]
     },
     { id: 'GENEALOGY', label: 'GENEALOGY', icon: Users },
@@ -121,7 +127,7 @@ export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, 
 
                     {/* Sub-item count badge indicator */}
                     <span className="text-[9px] font-mono px-1 py-0.2 bg-[#8B0000]/20 border border-[#8B0000]/60 text-[#8B0000] rounded-none mt-1">
-                      2 ARCS
+                      5 ARCS
                     </span>
 
                     {isActive && (
