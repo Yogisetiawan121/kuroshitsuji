@@ -84,9 +84,15 @@ export const ARCS_DATA = {
       { url: '/img/Weston%20College/Weston%20College.webp', caption: 'Weston College Quadrangle' },
       { url: '/img/Cricket%20Area/Cricket%20Area.jpg', caption: 'Cricket Tournament Pavilion Ground' },
       { url: '/img/Edgar%20Redmon/Edgar%20Redmon.webp', caption: 'Scarlet Fox Dormitory - Edgar Redmond' },
+      { url: '/img/Edgar%20Redmon/Edgar%20Redmon%202.webp', caption: 'Scarlet Fox Dormitory - Edgar Redmond'},
+      { url: '/img/Edgar%20Redmon/Edgar%20Redmon%203.jpg', caption: 'Scarlet Fox Dormitory - Edgar Redmond'},
+      { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer%202.jpg', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer'},
       { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer.webp', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer' },
+      { url: '/img/Herman%20Greenhill/Herman%20Greenhill%202.jpg', caption: 'Green Lion Dormitory - Herman Greenhill'},
       { url: '/img/Herman%20Greenhill/Herman%20Greenhill.webp', caption: 'Green Lion Dormitory - Herman Greenhill' },
-      { url: '/img/Gregory%20Violet/Gregory%20Violet.webp', caption: 'Purple Wolf Dormitory - Gregory Violet' }
+      { url: '/img/Gregory%20Violet/Gregory%20Violet%202.webp', caption: 'Purple Wolf Dormitory - Gregory Violet'},
+      { url: '/img/Gregory%20Violet/Gregory%20Violet.webp', caption: 'Purple Wolf Dormitory - Gregory Violet' },
+      { url: '/img/Gregory%20Violet/Gregory%20Violet%203.jpg', caption: 'Purple Wolf Dormitory - Gregory Violet'},
     ]
   },
 

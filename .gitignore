@@ -29,3 +29,8 @@ npm-debug.log*
 
 # Vite cache
 .vite/
+
+# freebuff
+.freebuff/
+
+.D\
