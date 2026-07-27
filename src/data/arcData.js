@@ -92,7 +92,7 @@ export const ARCS_DATA = {
       { url: '/img/Herman%20Greenhill/Herman%20Greenhill.webp', caption: 'Green Lion Dormitory - Herman Greenhill' },
       { url: '/img/Gregory%20Violet/Gregory%20Violet%202.webp', caption: 'Purple Wolf Dormitory - Gregory Violet'},
       { url: '/img/Gregory%20Violet/Gregory%20Violet.webp', caption: 'Purple Wolf Dormitory - Gregory Violet' },
-      { url: '/img/Gregory%20Violet/Gregory%20Violet%203.jpg', caption: 'Purple Wolf Dormitory - Gregory Violet'},
+      { url: '/img/Gregory%20Violet/Gregory%20Violet%203.jpg', caption: 'Purple Wolf Dormitory - Gregory Violet'}
     ]
   },
 

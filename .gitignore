@@ -31,6 +31,6 @@ npm-debug.log*
 .vite/
 
 # freebuff
-.freebuff/
+.freebuff
 
-.D\
+.D
