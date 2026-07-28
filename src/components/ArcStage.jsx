@@ -886,7 +886,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                 <img
                   src={currentImage.url}
                   alt={arc.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-30 h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80 pointer-events-none" />
