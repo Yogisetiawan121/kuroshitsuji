@@ -88,7 +88,7 @@ export const ARCS_DATA = {
       { url: '/img/Edgar%20Redmon/Edgar%20Redmon%203.jpg', caption: 'Scarlet Fox Dormitory - Edgar Redmond'},
       { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer%202.jpg', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer'},
       { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer.webp', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer' },
-      { url: '/img/Herman%20Greenhill/Herman%20Greenhill%202.webp', caption: 'Green Lion Dormitory - Herman Greenhill'},
+      { url: '/img/Herman%20Greenhill/Herman%20Greenhill%202.jpg', caption: 'Green Lion Dormitory - Herman Greenhill'},
       { url: '/img/Herman%20Greenhill/Herman%20Greenhill.webp', caption: 'Green Lion Dormitory - Herman Greenhill' },
       { url: '/img/Gregory%20Violet/Gregory%20Violet%202.webp', caption: 'Purple Wolf Dormitory - Gregory Violet'},
       { url: '/img/Gregory%20Violet/Gregory%20Violet.webp', caption: 'Purple Wolf Dormitory - Gregory Violet' },

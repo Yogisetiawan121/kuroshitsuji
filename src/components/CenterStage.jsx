@@ -160,7 +160,7 @@ export default function CenterStage({
                     e.target.onerror = null;
                     e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
                   }}
-                  className="w-30% h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                  className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 cubic-bezier(0.25, 0.46, 0.45, 0.94)"
                 />
                 
                 {/* Red undertone & subtle vignette inner shadow */}
