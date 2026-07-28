@@ -88,7 +88,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
   };
 
   return (
-    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col space-y-8 relative z-10 overflow-y-auto max-h-[calc(100dvh-60px)] touch-scroll pb-28 lg:pb-32">
+    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col space-y-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)] pb-28 lg:pb-32">
       
       {/* Top Dossier Header & Arc Switcher */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
@@ -886,7 +886,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                 <img
                   src={currentImage.url}
                   alt={arc.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="w-30% h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80 pointer-events-none" />

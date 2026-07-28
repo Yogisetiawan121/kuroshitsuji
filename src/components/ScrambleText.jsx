@@ -10,7 +10,6 @@ export default function ScrambleText({ text, className = '', delay = 0, duration
     let startTime = null;
     let animationFrame;
     
-    let lastUpdate = 0;
     const scramble = (timestamp) => {
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
@@ -20,20 +19,17 @@ export default function ScrambleText({ text, className = '', delay = 0, duration
       
       if (progress < duration + delay) {
         if (progress > delay) {
-          // Throttle state updates to ~30ms to prevent main thread lock on mobile
-          if (timestamp - lastUpdate > 30) {
-            lastUpdate = timestamp;
-            let currentText = '';
-            for (let i = 0; i < text.length; i++) {
-              if (i < revealCount || text[i] === ' ') {
-                currentText += text[i];
-              } else {
-                currentText += CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
-              }
+          let currentText = '';
+          for (let i = 0; i < text.length; i++) {
+            if (i < revealCount || text[i] === ' ') {
+              currentText += text[i];
+            } else {
+              currentText += CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
             }
-            setDisplayText(currentText);
           }
+          setDisplayText(currentText);
         } else {
+           // Before delay, just show scrambled or nothing. Let's show nothing or a single scrambled char
            setDisplayText('');
         }
         animationFrame = requestAnimationFrame(scramble);
