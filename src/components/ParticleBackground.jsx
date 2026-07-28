@@ -25,7 +25,10 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
     const isMurder = activeTab === 'MANOR_MURDERS';
     const isAtlantic = activeTab === 'THE_CAMPANIA';
 
-    const particleCount = Math.floor((width * height) / 16000);
+    const isMobile = width < 768;
+    const particleCount = isMobile 
+      ? Math.min(25, Math.floor((width * height) / 24000))
+      : Math.floor((width * height) / 16000);
     const particles = [];
 
     for (let i = 0; i < particleCount; i++) {
@@ -155,8 +158,10 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${p.opacity})`;
-        ctx.shadowBlur = p.radius > 1 ? 8 : 0;
-        ctx.shadowColor = p.shadowColor;
+        ctx.shadowBlur = isMobile ? 0 : (p.radius > 1 ? 8 : 0);
+        if (!isMobile && p.radius > 1) {
+          ctx.shadowColor = p.shadowColor;
+        }
         ctx.fill();
       });
 

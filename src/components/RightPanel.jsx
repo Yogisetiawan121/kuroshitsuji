@@ -27,7 +27,7 @@ export default function RightPanel({ character, onOpenContract, activeTab = 'STA
       variants={panelVariants}
       initial="hidden"
       animate="show"
-      className="w-full lg:w-[380px] shrink-0 p-4 lg:p-6 pb-28 lg:pb-32 bg-[#0A0A0A]/90 border-t lg:border-t-0 lg:border-l border-[#4A5568]/30 flex flex-col space-y-6 relative z-10 backdrop-blur-md min-h-full"
+      className="w-full lg:w-[380px] shrink-0 p-4 lg:p-6 pb-28 lg:pb-32 bg-[#0A0A0A]/90 border-t lg:border-t-0 lg:border-l border-[#4A5568]/30 flex flex-col space-y-6 relative z-10 backdrop-blur-md min-h-full touch-scroll"
     >
       
       {/* Panel Header */}

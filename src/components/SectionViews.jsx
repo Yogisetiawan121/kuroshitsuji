@@ -36,7 +36,7 @@ export default function SectionViews({ activeTab, character, onOpenContract, set
   const [selectedArchive, setSelectedArchive] = useState(ARCHIVE_FILES[0]);
 
   return (
-     <div className="flex-1 min-w-0 p-4 lg:p-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)] pb-28 lg:pb-32">
+     <div className="flex-1 min-w-0 p-4 lg:p-8 relative z-10 overflow-y-auto max-h-[calc(100dvh-60px)] touch-scroll pb-28 lg:pb-32">
         <AnimatePresence mode="wait">
       
       {/* LINEAGE & GENEALOGY VIEW */}

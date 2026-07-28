@@ -35,7 +35,7 @@ export default function CenterStage({
   const currentImage = character.images[selectedImgIndex] || character.images[0];
 
   return (
-    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col justify-between space-y-8 relative z-10 pb-28 lg:pb-32">
+    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col justify-between space-y-8 relative z-10 touch-scroll pb-28 lg:pb-32">
       
       {/* Top Header & Character Selector Toggle */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">
