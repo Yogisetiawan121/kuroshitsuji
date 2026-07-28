@@ -674,7 +674,7 @@ export default function ArcStage({ activeTab, onOpenContract, setActiveTab }) {
                       <span className="text-[9px] font-mono text-[#D4A373] font-bold block uppercase">{g.role}</span>
                       <h4 className="text-sm font-headline font-bold text-[#E2E8F0] truncate">{g.name}</h4>
                       <p className="text-[10px] font-mono text-[#8B0000] font-bold uppercase">{g.status}</p>
-                      <div className="gothic-corner-tr !w-1.5 !h-1.5" />
+                      <div className="gothic-corner-tr !w-1.5 !h-1.5  !top-[-9px]" />
                     </motion.div>
                   ))}
                 </div>
