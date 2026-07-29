@@ -92,6 +92,31 @@
   pointer-events: none;
 }
 
+/* Global Firefox & Mobile Dark Gothic Scrollbar Standards */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8B0000 #0A0A0A;
+}
+
+/* Mobile Touch Scroll Momentum & Overscroll Control */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  touch-action: manipulation;
+}
+
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+}
+
+.touch-scroll-x {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+}
+
 /* Hide scrollbar utility (used for nav bars, thumbnail strips) */
 .no-scrollbar {
   -ms-overflow-style: none;

@@ -296,7 +296,7 @@ export default function LeftRailNav({ activeTab, setActiveTab, activeCharacter, 
           variants={navContainerVariants}
           initial="hidden"
           animate="show"
-          className="flex items-center space-x-1.5 overflow-x-auto no-scrollbar pt-1 pb-0.5"
+          className="flex items-center space-x-1.5 overflow-x-auto no-scrollbar touch-scroll-x pt-1 pb-0.5"
         >
           {navItems.map((item) => {
             const Icon = item.icon;

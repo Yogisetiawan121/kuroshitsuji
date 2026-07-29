@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   GitBranch, 
@@ -34,9 +34,17 @@ const viewItemVariants = {
 
 export default function SectionViews({ activeTab, character, onOpenContract, setActiveTab }) {
   const [selectedArchive, setSelectedArchive] = useState(ARCHIVE_FILES[0]);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+    }
+    window.scrollTo(0, 0);
+  }, [activeTab]);
 
   return (
-     <div className="flex-1 min-w-0 p-4 lg:p-8 relative z-10 overflow-y-auto max-h-[calc(100vh-60px)] pb-28 lg:pb-32">
+     <div ref={containerRef} className="flex-1 min-w-0 p-4 lg:p-8 relative z-10 overflow-y-auto max-h-[calc(100dvh-60px)] touch-scroll pb-28 lg:pb-32">
         <AnimatePresence mode="wait">
       
       {/* LINEAGE & GENEALOGY VIEW */}

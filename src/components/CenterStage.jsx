@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldAlert, Layers, Maximize2, UserCheck } from 'lucide-react';
 import ScrambleText from './ScrambleText';
@@ -31,11 +31,19 @@ export default function CenterStage({
   }
   const [selectedImgIndex, setSelectedImgIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+    }
+    window.scrollTo(0, 0);
+  }, [activeTab, activeCharacter]);
 
   const currentImage = character.images[selectedImgIndex] || character.images[0];
 
   return (
-    <div className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col justify-between space-y-8 relative z-10 pb-28 lg:pb-32">
+    <div ref={containerRef} className="flex-1 min-w-0 p-4 lg:p-8 flex flex-col justify-between space-y-8 relative z-10 pb-28 lg:pb-32">
       
       {/* Top Header & Character Selector Toggle */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#4A5568]/30 pb-4">

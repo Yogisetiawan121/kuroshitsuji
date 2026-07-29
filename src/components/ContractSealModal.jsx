@@ -34,7 +34,7 @@ export default function ContractSealModal({ isOpen, onClose }) {
     <AnimatePresence>
       {isOpen && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl overflow-y-auto touch-scroll"
           role="dialog"
           aria-modal="true"
           aria-label="Faustian Contract Terms"
@@ -90,7 +90,7 @@ export default function ContractSealModal({ isOpen, onClose }) {
             </motion.div>
 
             {/* Modal Body */}
-            <div className="space-y-6 relative z-10 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="space-y-6 relative z-10 max-h-[60vh] overflow-y-auto touch-scroll pr-2">
               
               {/* Preamble / Signatories */}
               <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-[#121214] border border-[#4A5568]/30">

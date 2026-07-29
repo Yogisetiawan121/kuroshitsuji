@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ParticleBackground from './components/ParticleBackground';
 import LeftRailNav from './components/LeftRailNav';
 import CenterStage from './components/CenterStage';
@@ -19,6 +19,15 @@ export default function App() {
   const [isAudioMuted, setIsAudioMuted] = useState(false);
 
   const character = CHARACTERS[activeCharacter] || CHARACTERS.sebastian;
+
+  // Reset scroll position on activeTab or activeCharacter change across PC & Mobile
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    const scrollContainers = document.querySelectorAll('.overflow-y-auto, .touch-scroll');
+    scrollContainers.forEach((container) => {
+      container.scrollTop = 0;
+    });
+  }, [activeTab, activeCharacter]);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
