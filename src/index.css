@@ -213,3 +213,10 @@ html, body {
     opacity: 1;
   }
 }
+
+/* Fix #8: Pause ALL infinite animations when tab is hidden to save GPU layers */
+.pause-animations *,
+.pause-animations *::before,
+.pause-animations *::after {
+  animation-play-state: paused !important;
+}

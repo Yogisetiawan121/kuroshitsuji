@@ -29,6 +29,15 @@ export default function App() {
     });
   }, [activeTab, activeCharacter]);
 
+  // Fix #8: Pause infinite CSS animations when document tab is hidden to save GPU layers
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      document.body.classList.toggle('pause-animations', document.hidden);
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,

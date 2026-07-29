@@ -1,7 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 
+// Pre-computed sin lookup table (256 entries) to avoid Math.sin() per particle per frame
+const SIN_TABLE_SIZE = 256;
+const SIN_TABLE = new Float32Array(SIN_TABLE_SIZE);
+for (let i = 0; i < SIN_TABLE_SIZE; i++) {
+  SIN_TABLE[i] = Math.sin((i / SIN_TABLE_SIZE) * Math.PI * 2);
+}
+function fastSin(angle) {
+  // Normalize angle to [0, 2π) then map to table index
+  const idx = ((angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+  return SIN_TABLE[Math.floor((idx / (Math.PI * 2)) * SIN_TABLE_SIZE) % SIN_TABLE_SIZE];
+}
+
 export default function ParticleBackground({ activeTab = 'STATUS' }) {
   const canvasRef = useRef(null);
+  const isVisibleRef = useRef(true);
+  const isOnScreenRef = useRef(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -26,8 +40,9 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
     const isAtlantic = activeTab === 'THE_CAMPANIA';
 
     const isMobile = width < 768;
+    // Fix #1: Cap mobile to 10 particles max (was 25)
     const particleCount = isMobile
-      ? Math.min(25, Math.floor((width * height) / 24000))
+      ? Math.min(10, Math.floor((width * height) / 24000))
       : Math.floor((width * height) / 16000);
     const particles = [];
 
@@ -128,14 +143,22 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
     }
 
     let time = 0;
+    const needsSway = isWolfsGorge || isAtlantic;
+
     const render = () => {
+      // Pause when offscreen or tab hidden to save GPU
+      if (!isVisibleRef.current || !isOnScreenRef.current) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
       time += 0.015;
 
       particles.forEach((p) => {
-        if (isWolfsGorge || isAtlantic) {
-          // Sinusoidal wind/water sway
-          p.x += p.speedX + Math.sin(time + p.phase) * 0.35;
+        if (needsSway) {
+          // Use pre-computed sin lookup instead of Math.sin per particle per frame
+          p.x += p.speedX + fastSin(time + p.phase) * 0.35;
         } else {
           p.x += p.speedX;
         }
@@ -158,8 +181,15 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${p.opacity})`;
-        ctx.shadowBlur = isMobile ? 0 : (p.radius > 1 ? 8 : 0);
-        if (!isMobile) ctx.shadowColor = p.shadowColor;
+
+        // Fix #1: Skip shadowBlur entirely on mobile — don't even set the property
+        if (!isMobile && p.radius > 1.5) {
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = p.shadowColor;
+        } else if (!isMobile) {
+          ctx.shadowBlur = 0;
+        }
+
         ctx.fill();
       });
 
@@ -168,8 +198,25 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
 
     render();
 
+    // IntersectionObserver: pause when canvas scrolls offscreen
+    let observer;
+    if (typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(([entry]) => {
+        isOnScreenRef.current = entry.isIntersecting;
+      });
+      observer.observe(canvas);
+    }
+
+    // visibilitychange: pause when tab is hidden
+    const handleVisibility = () => {
+      isVisibleRef.current = !document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      if (observer) observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, [activeTab]);

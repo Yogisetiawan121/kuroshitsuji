@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
 
 export default function ScrambleText({ text, className = '', delay = 0, duration = 1000 }) {
-  const [displayText, setDisplayText] = useState('');
+  const elRef = useRef(null);
   
   useEffect(() => {
+    const el = elRef.current;
+    if (!el) return;
+
     let startTime = null;
     let animationFrame;
     
-    let lastUpdate = 0;
     const scramble = (timestamp) => {
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
@@ -20,26 +22,20 @@ export default function ScrambleText({ text, className = '', delay = 0, duration
       
       if (progress < duration + delay) {
         if (progress > delay) {
-          // Throttle state updates to ~30ms to reduce main thread pressure
-          if (timestamp - lastUpdate > 30) {
-            lastUpdate = timestamp;
-            let currentText = '';
-            for (let i = 0; i < text.length; i++) {
-              if (i < revealCount || text[i] === ' ') {
-                currentText += text[i];
-              } else {
-                currentText += CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
-              }
+          let currentText = '';
+          for (let i = 0; i < text.length; i++) {
+            if (i < revealCount || text[i] === ' ') {
+              currentText += text[i];
+            } else {
+              currentText += CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
             }
-            setDisplayText(currentText);
           }
-        } else {
-           // Before delay, just show scrambled or nothing
-           setDisplayText('');
+          // Direct DOM manipulation — zero React re-renders during animation
+          el.textContent = currentText;
         }
         animationFrame = requestAnimationFrame(scramble);
       } else {
-        setDisplayText(text);
+        el.textContent = text;
       }
     };
     
@@ -50,12 +46,11 @@ export default function ScrambleText({ text, className = '', delay = 0, duration
 
   return (
     <motion.span 
+      ref={elRef}
       className={className}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: delay / 1000 }}
-    >
-      {displayText}
-    </motion.span>
+    />
   );
 }
