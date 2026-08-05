@@ -82,17 +82,17 @@ export const ARCS_DATA = {
 
     images: [
       { url: '/img/Weston%20College/Weston%20College.webp', caption: 'Weston College Quadrangle' },
-      { url: '/img/Cricket%20Area/Cricket%20Area.jpg', caption: 'Cricket Tournament Pavilion Ground' },
+      { url: '/img/Cricket%20Area/Cricket%20Area.webp', caption: 'Cricket Tournament Pavilion Ground' },
       { url: '/img/Edgar%20Redmon/Edgar%20Redmon.webp', caption: 'Scarlet Fox Dormitory - Edgar Redmond' },
       { url: '/img/Edgar%20Redmon/Edgar%20Redmon%202.webp', caption: 'Scarlet Fox Dormitory - Edgar Redmond'},
-      { url: '/img/Edgar%20Redmon/Edgar%20Redmon%203.jpg', caption: 'Scarlet Fox Dormitory - Edgar Redmond'},
-      { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer%202.jpg', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer'},
+      { url: '/img/Edgar%20Redmon/Edgar%20Redmon%203.webp', caption: 'Scarlet Fox Dormitory - Edgar Redmond'},
+      { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer%202.webp', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer'},
       { url: '/img/Lawrence%20Bluewer/Lawrence%20Bluewer.webp', caption: 'Sapphire Owl Dormitory - Lawrence Bluewer' },
       { url: '/img/Herman%20Greenhill/Herman%20Greenhill%202.webp', caption: 'Green Lion Dormitory - Herman Greenhill'},
       { url: '/img/Herman%20Greenhill/Herman%20Greenhill.webp', caption: 'Green Lion Dormitory - Herman Greenhill' },
       { url: '/img/Gregory%20Violet/Gregory%20Violet%202.webp', caption: 'Purple Wolf Dormitory - Gregory Violet'},
       { url: '/img/Gregory%20Violet/Gregory%20Violet.webp', caption: 'Purple Wolf Dormitory - Gregory Violet' },
-      { url: '/img/Gregory%20Violet/Gregory%20Violet%203.jpg', caption: 'Purple Wolf Dormitory - Gregory Violet'}
+      { url: '/img/Gregory%20Violet/Gregory%20Violet%203.webp', caption: 'Purple Wolf Dormitory - Gregory Violet'}
     ]
   },
 
@@ -120,7 +120,7 @@ export const ARCS_DATA = {
         id: 'wolfram',
         name: 'WOLFRAM GELZER',
         title: 'MILITARY GUARD & DEVOTED BUTLER',
-        image: '/img/Wolfram%20Glezer/Wolfram%20Glezer%20.jpg',
+        image: '/img/Wolfram%20Glezer/Wolfram%20Glezer%20.webp',
         details: 'Sieglinde\'s devoted butler and bodyguard. Unlike Sebastian, his servitude is born of genuine affection and guilt. He knows the truth but protects Sieglinde from it, creating a tragic mirror to the Ciel-Sebastian dynamic.'
       }
     ],
@@ -158,10 +158,10 @@ export const ARCS_DATA = {
     ],
 
     images: [
-      { url: '/img/Wolfsschlucht%20Forrest/wolfsschlucht%20forrest.png', caption: 'Wolfsschlucht Forest - The Cursed Realm' },
+      { url: '/img/Wolfsschlucht%20Forrest/wolfsschlucht%20forrest.webp', caption: 'Wolfsschlucht Forest - The Cursed Realm' },
       { url: '/img/Sieglinde%20Sullivan/Sieglinde%20Sullivan%202.webp', caption: 'Sieglinde Sullivan - Scientific Genius' },
-      { url: '/img/Wolfram%20Glezer/Wolfram%20Glezer%20.jpg', caption: 'Wolfram Gelzer - Devoted Bodyguard' },
-      { url: '/img/Wolfram%20Glezer/Wolfram%20Glezer%202.jpg', caption: 'Wolfram Gelzer - Military Combat Specialist' }
+      { url: '/img/Wolfram%20Glezer/Wolfram%20Glezer%20.webp', caption: 'Wolfram Gelzer - Devoted Bodyguard' },
+      { url: '/img/Wolfram%20Glezer/Wolfram%20Glezer%202.webp', caption: 'Wolfram Gelzer - Military Combat Specialist' }
     ]
   },
 
@@ -216,7 +216,7 @@ export const ARCS_DATA = {
         role: 'Tightrope Walker',
         limb: 'Artificial Left Arm & Leg',
         color: '#A0A0A0',
-        image: '/img/Doll/Doll.jpg',
+        image: '/img/Doll/Doll.webp',
         desc: 'The youngest and most innocent. Befriends "Smile" (Ciel) without knowing his true Earl identity. Face hidden by makeup.'
       },
       {
@@ -279,12 +279,12 @@ export const ARCS_DATA = {
       { url: '/img/Beast/Beast.webp', caption: 'Beast — Fierce Beast Tamer' },
       { url: '/img/Dagger/Dagger.webp', caption: 'Dagger — Master Knife Thrower' },
       { url: '/img/Dagger/Dagger%202.webp', caption: 'Dagger — Inhuman Precision' },
-      { url: '/img/Doll/Doll.jpg', caption: 'Doll — Tightrope Walker' },
+      { url: '/img/Doll/Doll.webp', caption: 'Doll — Tightrope Walker' },
       { url: '/img/Doll/Doll%202.webp', caption: 'Doll — Unmasked Performance' },
       { url: '/img/Snake/Snake.webp', caption: 'Snake — Serpent Speaker' },
-      { url: '/img/Snake/Snake%202.jpg', caption: 'Snake — Sole Survivor' },
+      { url: '/img/Snake/Snake%202.webp', caption: 'Snake — Sole Survivor' },
       { url: '/img/Baron%20Kelvin/Baron%20Kelvin.webp', caption: 'Baron Kelvin — Obsessive Aristocrat' },
-      { url: '/img/Baron%20Kelvin/Baron%20Kelvin%202.jpg', caption: 'Baron Kelvin — Estate Ritual Ground' },
+      { url: '/img/Baron%20Kelvin/Baron%20Kelvin%202.webp', caption: 'Baron Kelvin — Estate Ritual Ground' },
       { url: '/img/Doctor/Doctor.webp', caption: 'The Doctor — Prosthetic Surgeon' }
     ]
   },
@@ -384,7 +384,7 @@ export const ARCS_DATA = {
         id: 'elizabeth',
         name: 'ELIZABETH MIDFORD',
         title: 'PRODIGY SWORDSWOMAN & CIEL\'S FIANCÉE',
-        image: '/img/Elizabeth%20Midford/Elizabeth%20Midford.jpg',
+        image: '/img/Elizabeth%20Midford/Elizabeth%20Midford.webp',
         details: 'Hidden her terrifying genius with twin blades for years to remain "delicate" for Ciel. When Bizarre Dolls attack, she unsheathes her swords and cuts down the undead in a flurry of pink silk and blood.',
         color: '#D4A5A5'
       },
@@ -443,13 +443,13 @@ export const ARCS_DATA = {
 
     images: [
       { url: '/img/Undertaker/Undertaker.webp', caption: 'The Undertaker — Master Reaper' },
-      { url: '/img/Undertaker/Undertaker%202.jpg', caption: 'The Undertaker — Unmasked Death Scythe' },
-      { url: '/img/Elizabeth%20Midford/Elizabeth%20Midford.jpg', caption: 'Elizabeth Midford — Dual Blade Master' },
+      { url: '/img/Undertaker/Undertaker%202.webp', caption: 'The Undertaker — Unmasked Death Scythe' },
+      { url: '/img/Elizabeth%20Midford/Elizabeth%20Midford.webp', caption: 'Elizabeth Midford — Dual Blade Master' },
       { url: '/img/Elizabeth%20Midford/Elizabeth%20Midford%202.webp', caption: 'Elizabeth Midford — Battle Attire' },
       { url: '/img/Grelle%20Sutcliff/Grelle%20Sutcliff.webp', caption: 'Grelle Sutcliff — Death Reaper Dispatch' },
-      { url: '/img/Grelle%20Sutcliff/Grelle%20Sutcliff%202.jpg', caption: 'Grelle Sutcliff — Chainsaw Scythe' },
+      { url: '/img/Grelle%20Sutcliff/Grelle%20Sutcliff%202.webp', caption: 'Grelle Sutcliff — Chainsaw Scythe' },
       { url: '/img/Ronald%20Knox/Ronald%20Knox.webp', caption: 'Ronald Knox — Junior Reaper' },
-      { url: '/img/Ronald%20Knox/Ronald%20Knox%202.jpg', caption: 'Ronald Knox — Lawn Mower Scythe' },
+      { url: '/img/Ronald%20Knox/Ronald%20Knox%202.webp', caption: 'Ronald Knox — Lawn Mower Scythe' },
       { url: '/img/Rian%20Stoker/Rian%20Stoker.webp', caption: 'Dr. Rian Stoker — Aurora Society Leader' }
     ]
   }

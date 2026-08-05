@@ -11,6 +11,7 @@ import AudioAmbience from './components/AudioAmbience';
 import { Volume2, VolumeX } from 'lucide-react';
 import { CHARACTERS } from './data/characterData';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
+import { preloadAllAssets } from './utils/preloadAssets';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('STATUS');
@@ -19,6 +20,11 @@ export default function App() {
   const [isAudioMuted, setIsAudioMuted] = useState(false);
 
   const character = CHARACTERS[activeCharacter] || CHARACTERS.sebastian;
+
+  // Background Web Caching: Warm up browser & SW caches during idle CPU time
+  useEffect(() => {
+    preloadAllAssets();
+  }, []);
 
   // Reset scroll position on activeTab or activeCharacter change across PC & Mobile
   useEffect(() => {
