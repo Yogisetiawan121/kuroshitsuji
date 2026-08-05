@@ -220,3 +220,16 @@ html, body {
 .pause-animations *::after {
   animation-play-state: paused !important;
 }
+
+/* Mobile performance: backdrop-filter is recomputed on every scroll pixel over
+   fixed elements, which is one of the most expensive operations on phones.
+   The affected backgrounds are near-opaque, so the visual difference is minimal. */
+@media (max-width: 1023px) {
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}

@@ -11,7 +11,7 @@ import AudioAmbience from './components/AudioAmbience';
 import { Volume2, VolumeX } from 'lucide-react';
 import { CHARACTERS } from './data/characterData';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
-import { preloadAllAssets } from './utils/preloadAssets';
+import { preloadAssetsForView } from './utils/preloadAssets';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('STATUS');
@@ -21,10 +21,11 @@ export default function App() {
 
   const character = CHARACTERS[activeCharacter] || CHARACTERS.sebastian;
 
-  // Background Web Caching: Warm up browser & SW caches during idle CPU time
+  // Background Web Caching: warm up caches for the *current* view only,
+  // during idle CPU time (skipped automatically on slow connections).
   useEffect(() => {
-    preloadAllAssets();
-  }, []);
+    preloadAssetsForView({ activeTab, activeCharacter });
+  }, [activeTab, activeCharacter]);
 
   // Reset scroll position on activeTab or activeCharacter change across PC & Mobile
   useEffect(() => {
@@ -45,11 +46,17 @@ export default function App() {
   }, []);
 
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+
+  // Mobile: use a near-instant spring so per-frame physics doesn't fight scrolling.
+  // Read matchMedia inline (cheap) so device rotation across the breakpoint updates it.
+  const isMobileViewport =
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 1023px)').matches;
+  const scaleX = useSpring(
+    scrollYProgress,
+    isMobileViewport
+      ? { stiffness: 400, damping: 80, restDelta: 0.01 }
+      : { stiffness: 100, damping: 30, restDelta: 0.001 }
+  );
 
   const isArcView = activeTab === 'WESTON_COLLEGE' || activeTab === 'WOLFS_GORGE' || activeTab === 'NOAHS_ARK' || activeTab === 'MANOR_MURDERS' || activeTab === 'THE_CAMPANIA';
 

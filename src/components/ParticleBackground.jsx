@@ -16,6 +16,7 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
   const canvasRef = useRef(null);
   const isVisibleRef = useRef(true);
   const isOnScreenRef = useRef(true);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -146,8 +147,8 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
     const needsSway = isWolfsGorge || isAtlantic;
 
     const render = () => {
-      // Pause when offscreen or tab hidden to save GPU
-      if (!isVisibleRef.current || !isOnScreenRef.current) {
+      // Pause when offscreen, tab hidden, or the user is actively scrolling
+      if (!isVisibleRef.current || !isOnScreenRef.current || isScrollingRef.current) {
         animationFrameId = requestAnimationFrame(render);
         return;
       }
@@ -213,9 +214,23 @@ export default function ParticleBackground({ activeTab = 'STATUS' }) {
     };
     document.addEventListener('visibilitychange', handleVisibility);
 
+    // Pause particle drawing while the user is scrolling (any scroll container).
+    // Capture phase catches scrolls inside inner containers, not just the window.
+    let scrollTimer;
+    const handleScroll = () => {
+      isScrollingRef.current = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 150);
+    };
+    window.addEventListener('scroll', handleScroll, { capture: true, passive: true });
+
     return () => {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('scroll', handleScroll, { capture: true });
+      clearTimeout(scrollTimer);
       if (observer) observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };

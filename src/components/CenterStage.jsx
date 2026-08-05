@@ -163,6 +163,8 @@ export default function CenterStage({
                 <img
                   src={currentImage.url}
                   alt={character.name}
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     // Fallback to dark gothic placeholder if any file path is unavailable
                     e.target.onerror = null;
@@ -216,6 +218,8 @@ export default function CenterStage({
                   <img 
                     src={img.url} 
                     alt="" 
+                    loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
@@ -275,6 +279,8 @@ export default function CenterStage({
             <img 
               src={currentImage.url} 
               alt="" 
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop';
