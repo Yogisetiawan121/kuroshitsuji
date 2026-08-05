@@ -15,7 +15,7 @@
  *  - Every cached copy doubles as the offline fallback.
  * ============================================================ */
 
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `kuroshitsuji-dossier-${CACHE_VERSION}`;
 
 // Media is served instantly from cache while younger than this,

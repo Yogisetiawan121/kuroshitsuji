@@ -20,7 +20,7 @@ export const CHARACTERS = {
 
     images: [
       { url: '/img/Sebastian%20Michaelis/409_Sebastian.webp', caption: 'Portrait - Executive Formal' },
-      { url: '/img/Sebastian%20Michaelis/97aec0b3f6245bf52e3bf85f1b2122ab.jpg', caption: 'Archive - Infernal Stare' },
+      { url: '/img/Sebastian%20Michaelis/97aec0b3f6245bf52e3bf85f1b2122ab.webp', caption: 'Archive - Infernal Stare' },
       { url: '/img/Sebastian%20Michaelis/Sebastian-Michaelis-Book-Of-Murder.avif', caption: 'Book of Murder - Investigation' },
       { url: '/img/Sebastian%20Michaelis/SebastianMichaelis.webp', caption: 'Demon Revelation - True Form' },
     ],

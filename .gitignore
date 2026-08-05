@@ -33,5 +33,6 @@ npm-debug.log*
 # freebuff
 .freebuff
 
-img/
-.D
+# Only the root-level source-image folder is ignored —
+# public/img must stay tracked so Vercel deploys the images.
+/img/
